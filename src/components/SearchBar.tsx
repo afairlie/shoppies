@@ -7,7 +7,7 @@ interface props {
 
 export const SearchBar: React.FC<props> = ({ onSearch }) => {
   // hook controls input state
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('apocalypse');
   // value of input debounced
   const debouncedTerm = useDebounce(value, 500);
 
