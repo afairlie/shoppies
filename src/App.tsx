@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 
 // interface search {
 //   results: movie[],
@@ -17,7 +16,13 @@ const App: React.FC = () => {
 
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=538adb24&s=${search.term}&type=movie`)
-    .then(res => res.json())
+    .then(res => {
+        if (res.status === 200) {
+          return res.json()
+        } else {
+          throw new Error('api search error')
+        }
+      })
     .then(res => {
       setSearch({...search, results: [...res.Search.map((movie: { Title: any; }) => movie.Title)]})
       console.log(res)
