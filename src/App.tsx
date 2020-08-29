@@ -27,13 +27,18 @@ const App: React.FC = () => {
         setResults(formattedResults)
         console.log(formattedResults)
     })
-  }, [term])
+  }, [term, nominations])
 
   const nominate = (movie: movie) => {
     if (nominations.length < 5) {
       setResults(prev => prev.map(m => m.title === movie.title ? {...m, nominated: true } : m ))
       setNominations(prev => [...prev, movie])
     }
+  }
+
+  const removeNomination = (movie: movie) => {
+    setNominations(prev => [...prev.filter(m => m.title !== movie.title)])
+    setResults(prev => prev.map(m => m.title === movie.title ? {...m, nominated: false } : m ))
   }
 
   return (
@@ -59,6 +64,7 @@ const App: React.FC = () => {
         {nominations && nominations.map((movie: any, index) => {
           return <li key={index}>
                   {`${movie.title}, ${movie.year} `}
+                  <button onClick={() => removeNomination(movie)}>remove</button>
                 </li>
         })}
       </ul>
