@@ -7,7 +7,9 @@ export const useDebounce: Hook = (term, ms) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => setDebounced(term), ms);
+    // cleanup to prevent repeated calls
     return () => clearTimeout(timeout);
   }, [term, ms])
+
   return debounced
 }

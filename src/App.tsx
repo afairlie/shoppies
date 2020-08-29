@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SearchBar } from './components/SearchBar';
-// import { formatResults } from './helpers/formatResults';
-
-// interface state {
-//   results: movie[],
-//   term: string
-// }
+import { formatResults } from './helpers/formatResults';
 
 interface movie {
   title: string,
@@ -20,25 +15,30 @@ const App: React.FC = () => {
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=538adb24&s=${term}&type=movie`)
     .then(res => {
-        if (res.status === 200) {
+        if (res.ok) {
           return res.json()
         } else {
           throw new Error('api search error')
         }
       })
     .then(res => {
-        setResults(res.Search)
+        const formattedResults = formatResults(res.Search)
+        setResults(formattedResults)
+        console.log(formattedResults)
     })
   }, [term])
 
   return (
     <div>
-      {/* Search */}
-      <SearchBar term={term} setTerm={setTerm}/>
-      {/* Results */}
+      {/* Search: onSearch, useCallback to setTerm at App level */}
+      <SearchBar onSearch={(term: string) => {
+        console.log(`searching for: ${term}`)
+        setTerm(term)
+      }}/>
+      {/* Results: render unordered list of movie titles + year */}
       <ul>
         {results && results.map((movie: any, index) => {
-          return <li key={index} >{`${movie.Title}, ${movie.Year}` }</li>
+          return <li key={index} >{`${movie.title}, ${movie.year}`}</li>
         })}
       </ul>
       {/* Nominations */}

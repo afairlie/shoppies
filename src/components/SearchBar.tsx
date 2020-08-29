@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useState, useCallback, useEffect } from 'react';
+import { useDebounce } from '../hooks/useDebounce';
 
 interface props {
-  term: string, 
-  setTerm: React.Dispatch<React.SetStateAction<string>>
+  onSearch: (term: string) => void
 }
 
-export const SearchBar: React.FC<props> = ({term, setTerm}) => {
+export const SearchBar: React.FC<props> = ({ onSearch }) => {
+  // hook controls input state
+  const [value, setValue] = useState('');
+  // value of input debounced
+  const debouncedTerm = useDebounce(value, 500);
+
+  // memoize onSearch callback
+  const search = useCallback(onSearch, [debouncedTerm]);
+
+  // search callback tracks debouncedTerm
+  useEffect(() => {
+    search(debouncedTerm);
+  }, [debouncedTerm, search]);
 
   return <input 
     type='text'
-    value={term}
-    onChange={e => setTerm(e.target.value)}
+    value={value}
+    onChange={e => setValue(e.target.value)}
     placeholder='search a movie'
   />
 }
