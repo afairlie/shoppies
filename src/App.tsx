@@ -25,7 +25,6 @@ const App: React.FC = () => {
     .then(res => {
         const formattedResults = formatResults(res.Search, nominations)
         setResults(formattedResults)
-        console.log(formattedResults)
     })
   }, [term, nominations])
 
@@ -44,11 +43,8 @@ const App: React.FC = () => {
   return (
     <div>
       {/* Search: onSearch, useCallback to setTerm at App level */}
-      <SearchBar onSearch={(term: string) => {
-        console.log(`searching for: ${term}`)
-        setTerm(term)
-      }}/>
-      {/* Results: render unordered list of movie titles + year */}
+      <SearchBar onSearch={(term: string) => setTerm(term)}/>
+      {/* Results: render list of movies w/ title, year, and nominate button */}
       <h1>Results</h1>
       <ul>
         {results && results.map((movie: any, index) => {
@@ -58,7 +54,7 @@ const App: React.FC = () => {
                 </li>
         })}
       </ul>
-      {/* Nominations */}
+      {/* Nominations: render list of movie noms with title, year, and remove button */}
       <h1>Nominations</h1>
       <ul>
         {nominations && nominations.map((movie: any, index) => {
