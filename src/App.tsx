@@ -26,6 +26,9 @@ const App: React.FC = () => {
         const formattedResults = formatResults(res.Search, nominations)
         setResults(formattedResults)
     })
+    .then(() => {
+      return nominations.length === 5 ? alert('congratulations, you nominated 5 movies!') : null
+    })
   }, [term, nominations])
 
   const nominate = (movie: movie) => {
