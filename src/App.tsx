@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { SearchBar } from './components/SearchBar';
+// import { formatResults } from './helpers/formatResults';
 
-// interface search {
+// interface state {
 //   results: movie[],
 //   term: string
 // }
 
-// interface movie {
-//   title: string,
-//   year: number,
-//   nominated: boolean
-// }
+interface movie {
+  title: string,
+  year: number,
+  nominated: boolean
+}
 
 const App: React.FC = () => {
-  let [search, setSearch] = useState<any>({results: [], term: 'ram'})
+  const [term, setTerm] = useState<string>('');
+  const [results, setResults] = useState<movie[]>([]);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=538adb24&s=${search.term}&type=movie`)
+    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=538adb24&s=${term}&type=movie`)
     .then(res => {
         if (res.status === 200) {
           return res.json()
@@ -24,19 +27,21 @@ const App: React.FC = () => {
         }
       })
     .then(res => {
-      setSearch({...search, results: [...res.Search.map((movie: { Title: any; }) => movie.Title)]})
-      console.log(res)
+        setResults(res.Search)
     })
-  }, [search.term])
+  }, [term])
 
   return (
     <div>
-      <input type='text' value={search.term} onChange={e => setSearch({...search, term: e.target.value})}></input>
+      {/* Search */}
+      <SearchBar term={term} setTerm={setTerm}/>
+      {/* Results */}
       <ul>
-        {search.results.map((r: React.ReactNode, index: number) => {
-          return <li key={index} >{r}</li>
+        {results && results.map((movie: any, index) => {
+          return <li key={index} >{`${movie.Title}, ${movie.Year}` }</li>
         })}
       </ul>
+      {/* Nominations */}
     </div>
   );
 }
