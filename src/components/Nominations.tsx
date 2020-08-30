@@ -34,16 +34,16 @@ const Title = styled.h1`
 
 export const Nominations: React.FC<props> = ({nominations, removeNomination}) => {
   return (
-    <FlexColumn>
-      <Title>{nominations.length ? 'Nominations' : null}</Title>
-      <NominationsList>
-        {nominations && nominations.map((movie, index) => {
-          return <li key={index}>
-                  {`${movie.title}, ${movie.year} `}
-                  <Button cancel onClick={() => removeNomination(movie)}>remove</Button>
-                </li>
-        })}
-      </NominationsList>
-    </FlexColumn>
+      <FlexColumn>
+        <Title>{nominations.length ? 'Nominations' : null}</Title>
+        <NominationsList>
+          {nominations && nominations.map((movie, index) => {
+            return <li key={index}>
+                    {`${movie.title}, ${movie.year} `}
+                    <Button cancel onClick={() => removeNomination(movie)}>remove</Button>
+                  </li>
+          })}
+        </NominationsList>
+      </FlexColumn>
   )
 }

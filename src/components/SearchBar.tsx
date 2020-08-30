@@ -14,6 +14,14 @@ const Input = styled.input`
   border-radius: ${({theme}) => (theme.borderRadius.curve)};
   border: none;
   font-size: ${({theme}) => (theme.fontSize.md)};
+  box-shadow: inset ${({theme}) => {
+    const xs = theme.spacing.xs
+    return `${xs} ${xs} ${xs}`
+  }} lightGray;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export const SearchBar: React.FC<props> = ({ onSearch }) => {

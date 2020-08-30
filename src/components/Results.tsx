@@ -26,10 +26,14 @@ const ResultsList = styled.ul`
   }
 `
 
+const Title = styled.h1`
+  padding-bottom: ${({theme}) => theme.spacing.sm};
+`
+
 export const Results: React.FC<props> = ({results, nominate}) => {
   return (
     <FlexColumn>
-      <h1>{results.length ? 'Results' : null}</h1>
+      <Title>{results.length ? 'Results' : null}</Title>
       <ResultsList>
         {results && results.map((movie, index) => {
           return <li key={index}>

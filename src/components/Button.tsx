@@ -18,6 +18,8 @@ const PrimaryButton = styled.button`
   
   &:hover {
     background-color: ${({theme}) => (theme.colors.primary)};
+    color: ${({theme}) => (theme.colors.highlightPrimary)};
+    border-color: transparent;
   }
 
   &:disabled {
