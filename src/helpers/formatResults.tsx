@@ -1,8 +1,4 @@
-interface movie {
-  title: string,
-  year: number,
-  nominated: boolean
-}
+import { movie } from '../interfaces'
 
 export const formatResults = (results: any[], nominations: movie[]): movie[] => {
   // format a new movie object with only title, year, and nomination status

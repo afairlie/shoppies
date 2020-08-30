@@ -1,12 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset'
+import { theme } from './styled/theme';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  body {
+    font-family: ${({theme}) => (theme.fontFamily.primary)};
+    padding: ${({theme}) => (theme.spacing.md)};
+  }
+  li {
+    padding-top: ${({theme}) => (theme.spacing.xs)};
+  }
+`
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle/>
+      <App/>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

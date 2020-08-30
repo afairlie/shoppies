@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { SearchBar } from './components/SearchBar';
+import styled from 'styled-components'
 import { formatResults } from './helpers/formatResults';
+import { movie } from './interfaces'
 
-interface movie {
-  title: string,
-  year: number,
-  nominated: boolean
-}
+import { SearchBar } from './components/SearchBar';
+import {Results} from './components/Results';
+
+const AppStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`
 
 const App: React.FC = () => {
   const [term, setTerm] = useState<string>('');
@@ -45,19 +50,11 @@ const App: React.FC = () => {
   }
 
   return (
-    <div>
+    <AppStyles>
       {/* Search: onSearch, useCallback to setTerm at App level */}
       <SearchBar onSearch={(term: string) => setTerm(term)}/>
       {/* Results: render list of movies w/ title, year, and nominate button */}
-      <h1>Results</h1>
-      <ul>
-        {results && results.map((movie, index) => {
-          return <li key={index}>
-                  {`${movie.title}, ${movie.year} `}
-                  <button disabled={movie.nominated} onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</button>
-                </li>
-        })}
-      </ul>
+      <Results results={results} nominate={nominate}/>
       {/* Nominations: render list of movie noms with title, year, and remove button */}
       <h1>Nominations</h1>
       <ul>
@@ -68,7 +65,7 @@ const App: React.FC = () => {
                 </li>
         })}
       </ul>
-    </div>
+    </AppStyles>
   );
 }
 
