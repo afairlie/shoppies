@@ -8,6 +8,12 @@ interface props {
 
 const Input = styled.input`
   color: ${({theme}) => (theme.colors.text)};
+  margin: ${({theme}) => (`${theme.spacing.sm} 0 ${theme.spacing.md}`)};
+  padding: ${({theme}) => (theme.spacing.xs)};
+  padding-left: ${({theme}) => (theme.spacing.sm)};
+  border-radius: ${({theme}) => (theme.borderRadius.curve)};
+  border: none;
+  font-size: ${({theme}) => (theme.fontSize.md)};
 `
 
 export const SearchBar: React.FC<props> = ({ onSearch }) => {

@@ -5,20 +5,22 @@ export const theme: DefaultTheme = {
 
   },
   colors: {
-    primary: 'blue',
+    primary: 'goldenRod',
     secondary: 'darkGreen',
+    cancel: 'brickRed',
     bgPrimary: 'lightGreen',
     bgSecondary: '',
-    highlightPrimary: '',
-    highlightSecondary: '',
+    highlightPrimary: 'white',
+    highlightSecondary: '#9e7a47',
     disabledPrimary: '',
     disabledSecondary: '',
-    text: 'navy',
+    text: '#5e4629',
+    title: '#160900',
     link: 'orange'
   },
   fontFamily: {
-    primary: 'Arial, sans-serif',
-    secondary: ''
+    text: 'Arial, sans-serif',
+    title: 'Abril Fatface, cursive'
   },
   fontSize: {
     xs: '0.25rem',
@@ -41,6 +43,6 @@ export const theme: DefaultTheme = {
   },
   borderRadius: {
     soften: '3pt',
-    curve: '10pt'
+    curve: '50pt'
   }
 }

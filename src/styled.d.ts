@@ -6,6 +6,7 @@ declare module 'styled-components' {
     colors: {
       primary: string,
       secondary: string,
+      cancel: string,
       bgPrimary: string,
       bgSecondary: string,
       highlightPrimary: string,
@@ -13,11 +14,12 @@ declare module 'styled-components' {
       disabledPrimary: string,
       disabledSecondary: string,
       text: string,
+      title: string,
       link: string
     },
     fontFamily: {
-      primary: string,
-      secondary: string
+      text: string,
+      title: string
     },
     fontSize: {
       xs: string,

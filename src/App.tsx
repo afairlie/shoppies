@@ -8,10 +8,20 @@ import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
 import {Nominations} from './components/Nominations';
 
-const AppStyles = styled.div`
+const MainStyles = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  color: ${({theme}) => (theme.colors.text)}
+`
+const Title = styled.h1`
+  font-family: ${({theme}) => (theme.fontFamily.title)};
+  font-size: ${({theme}) => (theme.fontSize.xl)};
+  background: -webkit-linear-gradient(#160900, #9e7a47);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: ${({theme}) => (theme.spacing.sm)};
+  line-height: normal;
 `
 
 const App: React.FC = () => {
@@ -51,7 +61,8 @@ const App: React.FC = () => {
   }
 
   return (
-    <AppStyles>
+    <MainStyles>
+      <Title> Shoppies 🎞</Title>
       {/* Search: onSearch, useCallback to setTerm at App level */}
       <SearchBar onSearch={(term: string) => setTerm(term)}/>
       <FlexRow>
@@ -60,7 +71,7 @@ const App: React.FC = () => {
         {/* Nominations: render list of movie noms with title, year, and remove button */}
         <Nominations nominations={nominations} removeNomination={removeNomination}/>
       </FlexRow>
-    </AppStyles>
+    </MainStyles>
   );
 }
 

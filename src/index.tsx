@@ -10,16 +10,9 @@ import { theme } from './styled/theme';
 const GlobalStyle = createGlobalStyle`
   ${reset}
   body {
-    font-family: ${({theme}) => (theme.fontFamily.primary)};
+    font-family: ${({theme}) => (theme.fontFamily.text)};
     padding: ${({theme}) => (theme.spacing.md)};
     background-color: ${({theme}) => (theme.colors.bgPrimary)};
-  }
-  input {
-    margin: ${({theme}) => (theme.spacing.sm)} 0;
-    padding: ${({theme}) => (theme.spacing.xs)};
-    border-radius: ${({theme}) => (theme.borderRadius.soften)};
-    border: none;
-    font-size: ${({theme}) => (theme.fontSize.md)};
   }
   li {
     padding-top: ${({theme}) => (theme.spacing.xs)};
