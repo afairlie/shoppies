@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { formatResults } from './helpers/formatResults';
 import { movie } from './interfaces'
+import { FlexRow } from './styled/index'
 
 import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
+import {Nominations} from './components/Nominations';
 
 const AppStyles = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
 `
 
@@ -53,18 +54,12 @@ const App: React.FC = () => {
     <AppStyles>
       {/* Search: onSearch, useCallback to setTerm at App level */}
       <SearchBar onSearch={(term: string) => setTerm(term)}/>
-      {/* Results: render list of movies w/ title, year, and nominate button */}
-      <Results results={results} nominate={nominate}/>
-      {/* Nominations: render list of movie noms with title, year, and remove button */}
-      <h1>Nominations</h1>
-      <ul>
-        {nominations && nominations.map((movie, index) => {
-          return <li key={index}>
-                  {`${movie.title}, ${movie.year} `}
-                  <button onClick={() => removeNomination(movie)}>remove</button>
-                </li>
-        })}
-      </ul>
+      <FlexRow>
+        {/* Results: render list of movies w/ title, year, and nominate button */}
+        <Results results={results} nominate={nominate}/>
+        {/* Nominations: render list of movie noms with title, year, and remove button */}
+        <Nominations nominations={nominations} removeNomination={removeNomination}/>
+      </FlexRow>
     </AppStyles>
   );
 }

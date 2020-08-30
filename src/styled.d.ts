@@ -32,7 +32,15 @@ declare module 'styled-components' {
       md: string,
       lg: string,
       xl: string,
+    },
+    borderWidth: {
+      sm: string,
+      md: string,
+      lg: string,
+    },
+    borderRadius: {
+      soften: string,
+      curve: string
     }
-    borderWidth: object
   }
 }

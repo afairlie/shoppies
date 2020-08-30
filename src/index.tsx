@@ -12,9 +12,20 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${({theme}) => (theme.fontFamily.primary)};
     padding: ${({theme}) => (theme.spacing.md)};
+    background-color: ${({theme}) => (theme.colors.bgPrimary)};
+  }
+  input {
+    margin: ${({theme}) => (theme.spacing.sm)} 0;
+    padding: ${({theme}) => (theme.spacing.xs)};
+    border-radius: ${({theme}) => (theme.borderRadius.soften)};
+    border: none;
+    font-size: ${({theme}) => (theme.fontSize.md)};
   }
   li {
     padding-top: ${({theme}) => (theme.spacing.xs)};
+  }
+  li:last-child {
+    padding-bottom: ${({theme}) => (theme.spacing.xs)};
   }
 `
 

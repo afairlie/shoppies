@@ -6,8 +6,8 @@ export const theme: DefaultTheme = {
   },
   colors: {
     primary: 'blue',
-    secondary: 'light-blue',
-    bgPrimary: 'white',
+    secondary: 'darkGreen',
+    bgPrimary: 'lightGreen',
     bgSecondary: '',
     highlightPrimary: '',
     highlightSecondary: '',
@@ -21,11 +21,11 @@ export const theme: DefaultTheme = {
     secondary: ''
   },
   fontSize: {
-    xs: '1rem',
-    sm: '3rem',
-    md: '5rem',
-    lg: '8rem',
-    xl: '10rem',
+    xs: '0.25rem',
+    sm: '0.75rem',
+    md: '2rem',
+    lg: '4rem',
+    xl: '6rem',
   },
   spacing: {
     xs: '0.5vw',
@@ -35,6 +35,12 @@ export const theme: DefaultTheme = {
     xl: '10vw',
   },
   borderWidth: {
-
+    sm: '1pt',
+    md: '2pt',
+    lg: '5pt',
+  },
+  borderRadius: {
+    soften: '3pt',
+    curve: '10pt'
   }
 }

@@ -1,9 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
+import styled from 'styled-components'
 
 interface props {
   onSearch: (term: string) => void
 }
+
+const Input = styled.input`
+  color: ${({theme}) => (theme.colors.text)};
+`
 
 export const SearchBar: React.FC<props> = ({ onSearch }) => {
   // hook controls input state
@@ -19,7 +24,7 @@ export const SearchBar: React.FC<props> = ({ onSearch }) => {
     search(debouncedTerm);
   }, [debouncedTerm, search]);
 
-  return <input 
+  return <Input 
     type='text'
     value={value}
     onChange={e => setValue(e.target.value)}
