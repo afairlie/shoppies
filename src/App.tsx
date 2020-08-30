@@ -14,7 +14,8 @@ const App: React.FC = () => {
   const [nominations, setNominations] = useState<movie[]>([]);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=538adb24&s=${term}&type=movie`)
+    const key = '538adb24'
+    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${key}&s=${term}&type=movie`)
     .then(res => {
         if (res.ok) {
           return res.json()
