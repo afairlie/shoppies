@@ -3,29 +3,49 @@ import styled from 'styled-components'
 
 interface props {
   children: any;
+  disabled?: boolean;
   primary?: boolean;
-  secondary?: boolean;
   cancel?: boolean;
+  onClick: any;
 }
 
 const PrimaryButton = styled.button`
-  background-color: ${({theme}) => (theme.colors.primary)}
-`
+  border: ${({theme}) => (`${theme.borderWidth.sm} solid ${theme.colors.secondary}`)};
+  border-radius: ${({theme}) => (theme.borderRadius.soften)};
+  color: ${({theme}) => (theme.colors.secondary)};
+  background-color: transparent;
+  padding: 0 ${({theme}) => (theme.spacing.xs)};
+  
+  &:hover {
+    background-color: ${({theme}) => (theme.colors.primary)};
+  }
 
-const SecondaryButton = styled.button`
-background-color: ${({theme}) => (theme.colors.secondary)}
+  &:disabled {
+    color: ${({theme}) => (theme.colors.disabledPrimary)};
+    border-color: ${({theme}) => (theme.colors.disabledPrimary)};
+    pointer-events: none;
+  }
 `
 
 const CancelButton = styled.button`
-background-color: ${({theme}) => (theme.colors.cancel)}
+  border: ${({theme}) => (`${theme.borderWidth.sm} solid ${theme.colors.cancel}`)};
+  border-radius: ${({theme}) => (theme.borderRadius.soften)};
+  color: ${({theme}) => (theme.colors.cancel)};
+  background-color: transparent;
+  padding: 0 ${({theme}) => (theme.spacing.xs)};
+
+  &:hover {
+    background-color: ${({theme}) => (theme.colors.cancel)};
+    border: none;
+    color: ${({theme}) => (theme.colors.highlightPrimary)};
+  }
 `
 
-export const Button: React.FC<props> = ({children, primary, secondary, cancel}) => {
+export const Button: React.FC<props> = ({children, primary, cancel, disabled, onClick}) => {
   return (
     <>
-      {primary && <PrimaryButton>{children}</PrimaryButton>}
-      {secondary && <SecondaryButton>{children}</SecondaryButton>}
-      {cancel && <CancelButton>{children}</CancelButton>}
+      {primary && <PrimaryButton disabled={disabled} onClick={onClick}>{children}</PrimaryButton>}
+      {cancel && <CancelButton disabled={disabled} onClick={onClick}>{children}</CancelButton>}
     </>
   )
 }

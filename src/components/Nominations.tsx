@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { movie } from '../interfaces'
 import { FlexColumn } from '../styled/index'
+import {Button} from '../components/Button'
 
 interface props {
   nominations: movie[],
@@ -39,7 +40,7 @@ export const Nominations: React.FC<props> = ({nominations, removeNomination}) =>
         {nominations && nominations.map((movie, index) => {
           return <li key={index}>
                   {`${movie.title}, ${movie.year} `}
-                  <button onClick={() => removeNomination(movie)}>remove</button>
+                  <Button cancel onClick={() => removeNomination(movie)}>remove</Button>
                 </li>
         })}
       </NominationsList>

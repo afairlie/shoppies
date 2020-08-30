@@ -7,12 +7,12 @@ export const theme: DefaultTheme = {
   colors: {
     primary: 'goldenRod',
     secondary: 'darkGreen',
-    cancel: 'brickRed',
+    cancel: 'fireBrick',
     bgPrimary: 'lightGreen',
     bgSecondary: '',
     highlightPrimary: 'white',
     highlightSecondary: '#9e7a47',
-    disabledPrimary: '',
+    disabledPrimary: '#bffac0',
     disabledSecondary: '',
     text: '#5e4629',
     title: '#160900',
@@ -37,7 +37,7 @@ export const theme: DefaultTheme = {
     xl: '10vw',
   },
   borderWidth: {
-    sm: '1pt',
+    sm: '0.5pt',
     md: '2pt',
     lg: '5pt',
   },
