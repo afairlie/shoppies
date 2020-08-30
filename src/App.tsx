@@ -51,7 +51,7 @@ const App: React.FC = () => {
       {/* Results: render list of movies w/ title, year, and nominate button */}
       <h1>Results</h1>
       <ul>
-        {results && results.map((movie: any, index) => {
+        {results && results.map((movie, index) => {
           return <li key={index}>
                   {`${movie.title}, ${movie.year} `}
                   <button disabled={movie.nominated} onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</button>
@@ -61,7 +61,7 @@ const App: React.FC = () => {
       {/* Nominations: render list of movie noms with title, year, and remove button */}
       <h1>Nominations</h1>
       <ul>
-        {nominations && nominations.map((movie: any, index) => {
+        {nominations && nominations.map((movie, index) => {
           return <li key={index}>
                   {`${movie.title}, ${movie.year} `}
                   <button onClick={() => removeNomination(movie)}>remove</button>

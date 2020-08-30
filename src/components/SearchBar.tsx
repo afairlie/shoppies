@@ -9,7 +9,7 @@ export const SearchBar: React.FC<props> = ({ onSearch }) => {
   // hook controls input state
   const [value, setValue] = useState('');
   // value of input debounced
-  const debouncedTerm = useDebounce(value, 500);
+  const debouncedTerm = useDebounce(value, 400);
 
   // memoize onSearch callback
   const search = useCallback(onSearch, [debouncedTerm]);
