@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { movie } from '../interfaces'
 import { FlexColumn } from '../styled/index'
-import { Button } from '../components/Button'
 
 interface props {
   results: movie[],
