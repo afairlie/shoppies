@@ -52,14 +52,12 @@ const App: React.FC = () => {
 
   const nominate = (movie: movie) => {
     if (nominations.length < 5) {
-      setResults(prev => prev.map(m => m.title === movie.title ? {...m, nominated: true } : m ))
       setNominations(prev => [...prev, movie])
     }
   }
 
   const removeNomination = (movie: movie) => {
     setNominations(prev => [...prev.filter(m => m.title !== movie.title)])
-    setResults(prev => prev.map(m => m.title === movie.title ? {...m, nominated: false } : m ))
   }
 
   const restart = () => {
