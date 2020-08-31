@@ -7,6 +7,7 @@ import { FlexRow } from './styled/index'
 import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
 import {Nominations} from './components/Nominations';
+import {Complete} from './components/Complete';
 
 const MainStyles = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const App: React.FC = () => {
   const [term, setTerm] = useState<string>('');
   const [results, setResults] = useState<movie[]>([]);
   const [nominations, setNominations] = useState<movie[]>([]);
-  const [complete, setComplete] = useState<boolean>(false);
+  const [isComplete, setComplete] = useState<boolean>(false);
 
   useEffect(() => {
     const key = '538adb24'
@@ -61,18 +62,22 @@ const App: React.FC = () => {
     setResults(prev => prev.map(m => m.title === movie.title ? {...m, nominated: false } : m ))
   }
 
+  const restart = () => {
+    // clear search and nominations
+  }
+
   return (
     <MainStyles>
-      {!complete && 
+      <Title> Shoppies 🎞</Title>
+      {!isComplete && 
       <>
-        <Title> Shoppies 🎞</Title>
         <SearchBar onSearch={(term: string) => setTerm(term)}/>
         <FlexRow>
           <Results results={results} nominate={nominate}/>
           <Nominations nominations={nominations} removeNomination={removeNomination}/>
         </FlexRow>
       </>}
-      {complete && <div>complete!</div>}
+      {isComplete && <Complete nominations={nominations} restart={restart}/>}
     </MainStyles>
   );
 }
