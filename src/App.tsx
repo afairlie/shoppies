@@ -70,14 +70,11 @@ const App: React.FC = () => {
   return (
     <MainStyles>
       <Title> Shoppies 🎞</Title>
-      {!isComplete && 
-      <>
         <SearchBar onSearch={(term: string) => setTerm(term)}/>
         <FlexRow>
           <Results results={results} nominate={nominate}/>
           <Nominations nominations={nominations} removeNomination={removeNomination}/>
         </FlexRow>
-      </>}
       {isComplete && <Complete nominations={nominations} restart={restart}/>}
     </MainStyles>
   );
