@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { formatResults } from './helpers/formatResults';
 import { movie } from './interfaces'
-import { FlexRow, FlexColumn } from './styled/index'
+import { ResponsiveFlexRow, FlexColumn } from './styled/index'
 
 import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
@@ -23,6 +23,10 @@ const Logo = styled.h1`
   -webkit-text-fill-color: transparent;
   margin-bottom: ${({theme}) => (theme.spacing.md)};
   line-height: normal;
+
+  @media (max-width: 779px) {
+    font-size: ${({theme}) => (theme.fontSize.md)};
+  }
 `
 
 const App: React.FC = () => {
@@ -76,13 +80,13 @@ const App: React.FC = () => {
     <MainStyles>
       <Logo> Shoppies 🎞</Logo>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
-        <FlexRow>
+        <ResponsiveFlexRow>
           <Results results={results} nominate={nominate}/>
           <FlexColumn>
-            {isComplete && <Complete nominations={nominations} restart={restart}/>}
+            {isComplete && <Complete restart={restart}/>}
             <Nominations nominations={nominations} removeNomination={removeNomination}/>
           </FlexColumn>
-        </FlexRow>
+        </ResponsiveFlexRow>
     </MainStyles>
   );
 }

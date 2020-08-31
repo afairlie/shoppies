@@ -9,16 +9,23 @@ interface props {
   onClick: any;
 }
 
-const PrimaryButton = styled.button`
-  border: ${({theme}) => (`${theme.borderWidth.sm} solid ${theme.colors.secondary}`)};
+const StyledButton = styled.button`
   border-radius: ${({theme}) => (theme.borderRadius.soften)};
-  color: ${({theme}) => (theme.colors.secondary)};
   background-color: transparent;
   padding: .25rem ${({theme}) => (theme.spacing.xs)};
-  
+  margin-bottom: .25rem;
+
+  &:hover {
+    color: ${({theme}) => (theme.colors.highlightPrimary)};
+  }
+`
+
+const PrimaryButton = styled(StyledButton)`
+  border: ${({theme}) => (`${theme.borderWidth.sm} solid ${theme.colors.secondary}`)};
+  color: ${({theme}) => (theme.colors.secondary)};
+
   &:hover {
     background-color: ${({theme}) => (theme.colors.primary)};
-    color: ${({theme}) => (theme.colors.highlightPrimary)};
     border-color: transparent;
   }
 
@@ -29,16 +36,13 @@ const PrimaryButton = styled.button`
   }
 `
 
-const CancelButton = styled.button`
+const CancelButton = styled(StyledButton)`
   border: ${({theme}) => (`${theme.borderWidth.sm} solid ${theme.colors.cancel}`)};
-  border-radius: ${({theme}) => (theme.borderRadius.soften)};
   color: ${({theme}) => (theme.colors.cancel)};
-  background-color: transparent;
-  padding: .25rem ${({theme}) => (theme.spacing.xs)};
+
 
   &:hover {
     background-color: ${({theme}) => (theme.colors.cancel)};
-    color: ${({theme}) => (theme.colors.highlightPrimary)};
   }
 
   &:focus {

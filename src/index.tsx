@@ -24,6 +24,10 @@ const GlobalStyle = createGlobalStyle`
 
   li {
     margin-top: ${({theme}) => (theme.spacing.xs)};
+    
+    span {
+      padding-top: ${({theme}) => (theme.spacing.xs)};
+    }
   }
   li:last-child {
     margin-bottom: ${({theme}) => (theme.spacing.xs)};

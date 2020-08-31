@@ -14,11 +14,17 @@ const ResultsList = styled.ul`
   flex-direction: column;
   width: 100%;
   color: ${({theme}) => theme.colors.secondary};
+  margin-bottom: ${({theme}) => theme.spacing.md};
 
   li {
     display: flex;
     justify-content: space-between;
-    padding: ${({theme}) => (`0 ${theme.spacing.md} 0 ${theme.spacing.sm}`)};
+  }
+
+  @media (min-width: 780px) {
+    li {
+      padding: ${({theme}) => (`0 ${theme.spacing.md} 0 ${theme.spacing.sm}`)};
+    }
   }
 `
 
@@ -33,7 +39,7 @@ export const Results: React.FC<props> = ({results, nominate}) => {
       <ResultsList>
         {results && results.map((movie, index) => {
           return <li key={index}>
-                  {`${movie.title}, ${movie.year} `}
+                  <span>{`${movie.title}, ${movie.year} `}</span>
                   <Button primary disabled={movie.nominated} onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</Button>
                 </li>
         })}

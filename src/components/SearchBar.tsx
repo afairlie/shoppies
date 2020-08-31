@@ -10,12 +10,13 @@ interface props {
 
 const Input = styled.input`
   color: ${({theme}) => (theme.colors.text)};
+  font-size: ${({theme}) => (theme.fontSize.md)};
   margin: ${({theme}) => (`${theme.spacing.sm} 0 ${theme.spacing.md}`)};
   padding: ${({theme}) => (theme.spacing.xs)};
   padding-left: ${({theme}) => (theme.spacing.sm)};
   border-radius: ${({theme}) => (theme.borderRadius.curve)};
   border: none;
-  font-size: ${({theme}) => (theme.fontSize.md)};
+  
   box-shadow: inset ${({theme}) => {
     const xs = theme.spacing.xs
     return `${xs} ${xs} ${xs}`
@@ -23,6 +24,11 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 779px) {
+    font-size: ${({theme}) => (theme.fontSize.sm)};
+    padding-left: ${({theme}) => (theme.spacing.md)};
   }
 `
 
