@@ -32,7 +32,7 @@ export const theme: DefaultTheme = {
   spacing: {
     xs: '0.5vw',
     sm: '1vw',
-    md: '5vw',
+    md: '3.75vw',
     lg: '8vw',
     xl: '10vw',
   },

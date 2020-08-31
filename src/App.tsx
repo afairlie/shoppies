@@ -21,7 +21,7 @@ const Title = styled.h1`
   background: -webkit-linear-gradient(#160900, #9e7a47);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: ${({theme}) => (theme.spacing.sm)};
+  margin-bottom: ${({theme}) => (theme.spacing.md)};
   line-height: normal;
 `
 

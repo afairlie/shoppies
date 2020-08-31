@@ -13,7 +13,7 @@ const Container = styled.div`
 export const Complete: React.FC<props> = ({nominations, restart}) => {
   return (
     <Container>
-      <h1>you nominated:</h1>
+      <h1>Congratulations, you nominated:</h1>
       <ul>
         {nominations && nominations.map((movie, index) => {
           return (
