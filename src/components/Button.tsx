@@ -38,7 +38,6 @@ const CancelButton = styled.button`
 
   &:hover {
     background-color: ${({theme}) => (theme.colors.cancel)};
-    border: none;
     color: ${({theme}) => (theme.colors.highlightPrimary)};
   }
 

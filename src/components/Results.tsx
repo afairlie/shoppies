@@ -20,10 +20,6 @@ const ResultsList = styled.ul`
     justify-content: space-between;
     padding: ${({theme}) => (`0 ${theme.spacing.md} 0 ${theme.spacing.sm}`)};
   }
-
-  li:hover {
-    color: ${({theme}) => theme.colors.highlightPrimary};
-  }
 `
 
 // const Title = styled.h1`

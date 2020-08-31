@@ -12,7 +12,6 @@ interface props {
 const NominationsList = styled.ul`
 display: flex;
 flex-direction: column;
-width: 100%;
 color: ${({theme}) => theme.colors.primary};
 
 li {
@@ -20,22 +19,12 @@ li {
   justify-content: space-between;
   padding-right: ${({theme}) => theme.spacing.md};
 }
-
-li:hover {
-  color: ${({theme}) => theme.colors.highlightPrimary};
-}
-`
-
-const Title = styled.h1`
-  font-family: ${({theme}) => (theme.fontFamily.title)};
-  font-size: ${({theme}) => (theme.fontSize.md)};
-  margin-bottom: ${({theme}) => (theme.spacing.sm)};
 `
 
 export const Nominations: React.FC<props> = ({nominations, removeNomination}) => {
   return (
       <FlexColumn>
-        <Title>{nominations.length ? `Nominations (${nominations.length}/5)` : null}</Title>
+        <h1>{nominations.length ? `Nominations (${nominations.length}/5)` : null}</h1>
         <NominationsList>
           {nominations && nominations.map((movie, index) => {
             return <li key={index}>

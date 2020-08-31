@@ -9,16 +9,27 @@ import { theme } from './styled/theme';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+
   body {
     font-family: ${({theme}) => (theme.fontFamily.text)};
     padding: ${({theme}) => (theme.spacing.md)};
     background-color: ${({theme}) => (theme.colors.bgPrimary)};
   }
+
+  h1 {
+    font-family: ${({theme}) => (theme.fontFamily.title)};
+    font-size: ${({theme}) => (theme.fontSize.md)};
+    margin-bottom: ${({theme}) => (theme.spacing.sm)};
+  }
+
   li {
     margin-top: ${({theme}) => (theme.spacing.xs)};
   }
   li:last-child {
     margin-bottom: ${({theme}) => (theme.spacing.xs)};
+  }
+  li:hover {
+    color: ${({theme}) => theme.colors.highlightPrimary};
   }
 `
 
