@@ -41,6 +41,10 @@ const CancelButton = styled.button`
     border: none;
     color: ${({theme}) => (theme.colors.highlightPrimary)};
   }
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export const Button: React.FC<props> = ({children, primary, cancel, disabled, onClick}) => {

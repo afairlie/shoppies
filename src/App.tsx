@@ -26,7 +26,9 @@ const Title = styled.h1`
 `
 
 const App: React.FC = () => {
+  // debounced search term for API
   const [term, setTerm] = useState<string>('');
+  // controlled input value for SearchBar
   const [value, setValue] = useState('');
   const [results, setResults] = useState<movie[]>([]);
   const [nominations, setNominations] = useState<movie[]>([]);
