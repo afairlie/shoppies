@@ -57,7 +57,7 @@ const App: React.FC = () => {
   }
 
   const removeNomination = (movie: movie) => {
-    setNominations(prev => [...prev.filter(m => m.title !== movie.title)])
+    setNominations(prev => [...prev.filter(m => m.title !== movie.title || m.year !== movie.year)])
   }
 
   const restart = () => {
