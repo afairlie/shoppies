@@ -14,7 +14,7 @@ const PrimaryButton = styled.button`
   border-radius: ${({theme}) => (theme.borderRadius.soften)};
   color: ${({theme}) => (theme.colors.secondary)};
   background-color: transparent;
-  padding: 0 ${({theme}) => (theme.spacing.xs)};
+  padding: .25rem ${({theme}) => (theme.spacing.xs)};
   
   &:hover {
     background-color: ${({theme}) => (theme.colors.primary)};
@@ -34,7 +34,7 @@ const CancelButton = styled.button`
   border-radius: ${({theme}) => (theme.borderRadius.soften)};
   color: ${({theme}) => (theme.colors.cancel)};
   background-color: transparent;
-  padding: 0 ${({theme}) => (theme.spacing.xs)};
+  padding: .25rem ${({theme}) => (theme.spacing.xs)};
 
   &:hover {
     background-color: ${({theme}) => (theme.colors.cancel)};

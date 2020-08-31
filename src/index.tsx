@@ -15,10 +15,10 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({theme}) => (theme.colors.bgPrimary)};
   }
   li {
-    padding-top: ${({theme}) => (theme.spacing.xs)};
+    margin-top: ${({theme}) => (theme.spacing.xs)};
   }
   li:last-child {
-    padding-bottom: ${({theme}) => (theme.spacing.xs)};
+    margin-bottom: ${({theme}) => (theme.spacing.xs)};
   }
 `
 

@@ -28,6 +28,7 @@ const App: React.FC = () => {
   const [term, setTerm] = useState<string>('');
   const [results, setResults] = useState<movie[]>([]);
   const [nominations, setNominations] = useState<movie[]>([]);
+  const [complete, setComplete] = useState<boolean>(false);
 
   useEffect(() => {
     const key = '538adb24'
@@ -44,7 +45,7 @@ const App: React.FC = () => {
         setResults(formattedResults)
     })
     .then(() => {
-      return nominations.length === 5 ? alert('congratulations, you nominated 5 movies!') : null
+      return nominations.length === 5 ? setComplete(true) : null
     })
   }, [term, nominations])
 
@@ -62,15 +63,16 @@ const App: React.FC = () => {
 
   return (
     <MainStyles>
-      <Title> Shoppies 🎞</Title>
-      {/* Search: onSearch, useCallback to setTerm at App level */}
-      <SearchBar onSearch={(term: string) => setTerm(term)}/>
-      <FlexRow>
-        {/* Results: render list of movies w/ title, year, and nominate button */}
-        <Results results={results} nominate={nominate}/>
-        {/* Nominations: render list of movie noms with title, year, and remove button */}
-        <Nominations nominations={nominations} removeNomination={removeNomination}/>
-      </FlexRow>
+      {!complete && 
+      <>
+        <Title> Shoppies 🎞</Title>
+        <SearchBar onSearch={(term: string) => setTerm(term)}/>
+        <FlexRow>
+          <Results results={results} nominate={nominate}/>
+          <Nominations nominations={nominations} removeNomination={removeNomination}/>
+        </FlexRow>
+      </>}
+      {complete && <div>complete!</div>}
     </MainStyles>
   );
 }
