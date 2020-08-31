@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
 import styled from 'styled-components'
 
 interface props {
-  onSearch: (term: string) => void
+  onSearch: (term: string) => void,
+  value: string,
+  setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Input = styled.input`
@@ -24,9 +26,9 @@ const Input = styled.input`
   }
 `
 
-export const SearchBar: React.FC<props> = ({ onSearch }) => {
+export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
   // hook controls input state
-  const [value, setValue] = useState('');
+  
   // value of input debounced
   const debouncedTerm = useDebounce(value, 400);
 
@@ -38,10 +40,14 @@ export const SearchBar: React.FC<props> = ({ onSearch }) => {
     search(debouncedTerm);
   }, [debouncedTerm, search]);
 
-  return <Input 
-    type='text'
-    value={value}
-    onChange={e => setValue(e.target.value)}
-    placeholder='search a movie'
-  />
+  return (
+    <>
+      <Input 
+        type='text'
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        placeholder='search a movie'
+      />
+    </>
+  )
 }

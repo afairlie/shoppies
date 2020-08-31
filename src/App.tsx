@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { formatResults } from './helpers/formatResults';
 import { movie } from './interfaces'
-import { FlexRow } from './styled/index'
+import { FlexRow, FlexColumn } from './styled/index'
 
 import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
@@ -27,6 +27,7 @@ const Title = styled.h1`
 
 const App: React.FC = () => {
   const [term, setTerm] = useState<string>('');
+  const [value, setValue] = useState('');
   const [results, setResults] = useState<movie[]>([]);
   const [nominations, setNominations] = useState<movie[]>([]);
   const [isComplete, setComplete] = useState<boolean>(false);
@@ -57,11 +58,13 @@ const App: React.FC = () => {
   }
 
   const removeNomination = (movie: movie) => {
+    if (isComplete) {setComplete(false)}
     setNominations(prev => [...prev.filter(m => m.title !== movie.title || m.year !== movie.year)])
   }
 
   const restart = () => {
     setTerm('')
+    setValue('')
     setResults([])
     setNominations([])
     setComplete(false)
@@ -70,12 +73,14 @@ const App: React.FC = () => {
   return (
     <MainStyles>
       <Title> Shoppies 🎞</Title>
-        <SearchBar onSearch={(term: string) => setTerm(term)}/>
+        <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <FlexRow>
           <Results results={results} nominate={nominate}/>
-          <Nominations nominations={nominations} removeNomination={removeNomination}/>
+          <FlexColumn>
+            {isComplete && <Complete nominations={nominations} restart={restart}/>}
+            <Nominations nominations={nominations} removeNomination={removeNomination}/>
+          </FlexColumn>
         </FlexRow>
-      {isComplete && <Complete nominations={nominations} restart={restart}/>}
     </MainStyles>
   );
 }
