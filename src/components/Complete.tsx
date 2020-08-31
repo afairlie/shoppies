@@ -34,10 +34,9 @@ export const Complete: React.FC<props> = ({nominations, restart}) => {
     <Banner>
       <h1>Congratulations, your list is complete!</h1>
       <h2>
-        would you like to 
-        <button>share</button> 
-        or 
+        Would you like to <span/>
         <Reset cancel onClick={() => restart()}>restart</Reset>
+        <span/> ?
       </h2>
     </Banner>
   )

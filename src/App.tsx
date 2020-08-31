@@ -15,7 +15,7 @@ const MainStyles = styled.div`
   width: 100%;
   color: ${({theme}) => (theme.colors.text)}
 `
-const Title = styled.h1`
+const Logo = styled.h1`
   font-family: ${({theme}) => (theme.fontFamily.title)};
   font-size: ${({theme}) => (theme.fontSize.xl)};
   background: -webkit-linear-gradient(#160900, #9e7a47);
@@ -74,7 +74,7 @@ const App: React.FC = () => {
 
   return (
     <MainStyles>
-      <Title> Shoppies 🎞</Title>
+      <Logo> Shoppies 🎞</Logo>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <FlexRow>
           <Results results={results} nominate={nominate}/>
