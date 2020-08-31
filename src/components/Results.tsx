@@ -18,7 +18,7 @@ const ResultsList = styled.ul`
   li {
     display: flex;
     justify-content: space-between;
-    padding-right: ${({theme}) => theme.spacing.md};
+    padding: ${({theme}) => (`0 ${theme.spacing.md} 0 ${theme.spacing.sm}`)};
   }
 
   li:hover {
@@ -26,14 +26,14 @@ const ResultsList = styled.ul`
   }
 `
 
-const Title = styled.h1`
-  padding-bottom: ${({theme}) => theme.spacing.sm};
-`
+// const Title = styled.h1`
+//   padding-bottom: ${({theme}) => theme.spacing.sm};
+// `
 
 export const Results: React.FC<props> = ({results, nominate}) => {
   return (
     <FlexColumn>
-      <Title>{results.length ? 'Results' : null}</Title>
+      {/* <Title>{results.length ? 'Results' : null}</Title> */}
       <ResultsList>
         {results && results.map((movie, index) => {
           return <li key={index}>

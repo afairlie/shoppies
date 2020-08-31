@@ -63,7 +63,6 @@ const App: React.FC = () => {
   }
 
   const restart = () => {
-    // clear search and nominations
     setTerm('')
     setResults([])
     setNominations([])
