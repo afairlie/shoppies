@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import { movie } from '../interfaces'
-import { FlexColumn } from '../styled/index'
 import {Button} from '../components/Button'
 
 interface props {
@@ -9,7 +9,7 @@ interface props {
   nominate: (movie: movie) => void
 }
 
-const ResultsList = styled.ul`
+const ResultsList = styled(motion.ul)`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -28,22 +28,32 @@ const ResultsList = styled.ul`
   }
 `
 
-// const Title = styled.h1`
-//   padding-bottom: ${({theme}) => theme.spacing.sm};
-// `
+const container = {
+  hidden: {},
+  show: {
+    scale: 1,
+    transition: {
+      when: 'beforeChildren',
+      delayChildren: 2,
+      staggerChildren: 0.4
+    }
+  }
+}
+
+const item = {
+  hidden: { scaleY: 0 },
+  show: { scaleY: 1}
+}
 
 export const Results: React.FC<props> = ({results, nominate}) => {
   return (
-    <FlexColumn>
-      {/* <Title>{results.length ? 'Results' : null}</Title> */}
-      <ResultsList>
-        {results && results.map((movie, index) => {
-          return <li key={index}>
-                  <span>{`${movie.title}, ${movie.year} `}</span>
-                  <Button primary disabled={movie.nominated} onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</Button>
-                </li>
-        })}
+      <ResultsList initial='hidden' animate='show' variants={container}>
+            {results.map((movie, index) => {
+              return <motion.li key={index} variants={item}>
+                      <span>{`${movie.title}, ${movie.year} `}</span>
+                      <Button primary disabled={movie.nominated} onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</Button>
+                    </motion.li>
+            })}
       </ResultsList>
-    </FlexColumn>
   )
 }

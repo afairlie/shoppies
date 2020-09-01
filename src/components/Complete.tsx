@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { Button } from './Button'
 
@@ -24,24 +24,51 @@ const Banner = styled(motion.div)`
   }
 `
 
+const container = {
+  hidden: { 
+    height: 0,
+    transition: {
+      when: 'afterChildren'
+    }
+  },
+  show: {
+    height: '100%',
+    transition: {
+      duration: 0.4,
+      ease: "easeInOut",
+      overflow: 'hidden'
+    }
+  },
+  onExit: { 
+    height: 0,
+    transition: {
+      duration: 0.4
+    }
+  }
+}
+
+const child = {
+  hidden: { scaleY: 0},
+  show: { scaleY: 1 },
+  onExit: { 
+    scaleY: 0,
+    transition: {
+      duration: 0.2
+    }
+  }
+}
+
 export const Complete: React.FC<props> = ({restart}) => {
   return (
-    <Banner
-      initial={{height: 0 }}
-      animate={{height: '100%' }}
-      exit={{height: 0}}
-      transition={{
-        duration: 0.8,
-        ease: "easeInOut",
-        overflow: 'hidden'
-      }}
-    >
-      <motion.h1>Congratulations, your list is complete!</motion.h1>
-      <motion.h2>
-        Would you like to <span/>
-        <Button cancel onClick={() => restart()}>restart</Button>
-        <span/> ?
-      </motion.h2>
+    <Banner initial='hidden' animate='show' exit='onExit' variants={container}>
+      <AnimatePresence exitBeforeEnter>
+        <motion.h1 variants={child}>Congratulations, your list is complete!</motion.h1>
+        <motion.h2 variants={child}>
+          Would you like to <span/>
+          <Button cancel onClick={() => restart()}>restart</Button>
+          <span/> ?
+        </motion.h2>
+      </AnimatePresence>
     </Banner>
   )
 }

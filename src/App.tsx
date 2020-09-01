@@ -92,7 +92,7 @@ const App: React.FC = () => {
                 <AnimatePresence>
                   {isComplete && <Complete restart={restart}/>}
                 </AnimatePresence>
-                <Nominations nominations={nominations} removeNomination={removeNomination}/>
+                  <Nominations nominations={nominations} removeNomination={removeNomination}/>
             </MotionFlexColumn>
         </ResponsiveFlexRow>
     </MainStyles>
