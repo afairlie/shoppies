@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
+
 import { Button } from './Button'
 
 interface props {
-  restart: () => void
+  restart: () => void,
 }
 
-const Banner = styled.div`
+const Banner = styled(motion.div)`
   dispay: flex;
   flex-direction: column;
   background-color: ${({theme}) => theme.colors.primary};
@@ -24,13 +26,22 @@ const Banner = styled.div`
 
 export const Complete: React.FC<props> = ({restart}) => {
   return (
-    <Banner>
-      <h1>Congratulations, your list is complete!</h1>
-      <h2>
+    <Banner
+      initial={{height: 0 }}
+      animate={{height: '100%' }}
+      exit={{height: 0}}
+      transition={{
+        duration: 0.8,
+        ease: "easeInOut",
+        overflow: 'hidden'
+      }}
+    >
+      <motion.h1>Congratulations, your list is complete!</motion.h1>
+      <motion.h2>
         Would you like to <span/>
         <Button cancel onClick={() => restart()}>restart</Button>
         <span/> ?
-      </h2>
+      </motion.h2>
     </Banner>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import { movie } from '../interfaces'
 import { FlexColumn } from '../styled/index'
 import { Button } from '../components/Button'
@@ -25,12 +26,10 @@ li {
   }
 }
 `
-
 const Title = styled.h1`
   @media (max-width: 779px) {
     padding-bottom: ${({theme}) => theme.spacing.md};
   }
-  
 `
 
 export const Nominations: React.FC<props> = ({nominations, removeNomination}) => {

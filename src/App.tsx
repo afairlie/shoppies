@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
+import { motion, AnimatePresence } from 'framer-motion'
 import { formatResults } from './helpers/formatResults';
 import { movie } from './interfaces'
-import { ResponsiveFlexRow, FlexColumn } from './styled/index'
+import { ResponsiveFlexRow } from './styled/index'
 
 import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
@@ -27,6 +28,11 @@ const Logo = styled.h1`
   @media (max-width: 779px) {
     font-size: ${({theme}) => (theme.fontSize.md)};
   }
+`
+const MotionFlexColumn = styled(motion.section)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 const App: React.FC = () => {
@@ -82,10 +88,12 @@ const App: React.FC = () => {
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <ResponsiveFlexRow>
           <Results results={results} nominate={nominate}/>
-          <FlexColumn>
-            {isComplete && <Complete restart={restart}/>}
-            <Nominations nominations={nominations} removeNomination={removeNomination}/>
-          </FlexColumn>
+            <MotionFlexColumn>
+                <AnimatePresence>
+                  {isComplete && <Complete restart={restart}/>}
+                </AnimatePresence>
+                <Nominations nominations={nominations} removeNomination={removeNomination}/>
+            </MotionFlexColumn>
         </ResponsiveFlexRow>
     </MainStyles>
   );
