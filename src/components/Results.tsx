@@ -51,9 +51,15 @@ export const Results: React.FC<props> = ({results, nominate}) => {
   return (
       <ResultsList initial='hidden' animate='show' variants={container}>
           {results && results.map((movie, index) => {
-            return <motion.li key={index} variants={item} custom={index}>
+            return <motion.li 
+                    key={index} 
+                    variants={item} 
+                    custom={index}>
               <span>{`${index + 1} ${movie.title}, ${movie.year} `}</span>
-              <Button primary disabled={movie.nominated} onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</Button>
+              <Button 
+                primary 
+                disabled={movie.nominated} 
+                onClick={() => nominate(movie)}>{movie.nominated ? 'nominated' : 'nominate!'}</Button>
             </motion.li>
           })}
       </ResultsList>

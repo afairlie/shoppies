@@ -56,12 +56,16 @@ const App: React.FC = () => {
       })
     .then(res => {
         const formattedResults = formatResults(res.Search, nominations)
-        setResults(formattedResults)
+        setResults(prev => [...formattedResults])
     })
     .then(() => {
-      return nominations.length === 5 ? setComplete(true) : null
+      nominations.length === 5 && setComplete(true)
     })
   }, [term, nominations])
+
+  useEffect(() => {
+    setResults([])
+  }, [term])
 
   const nominate = (movie: movie) => {
     if (nominations.length < 5) {
@@ -87,7 +91,7 @@ const App: React.FC = () => {
       <Logo> Shoppies 🎞</Logo>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <ResponsiveFlexRow>
-          <Results results={results} nominate={nominate}/>
+          <Results results={results} nominate={nominate} />
             <MotionFlexColumn>
                 <AnimatePresence>
                   {isComplete && <Complete restart={restart}/>}
