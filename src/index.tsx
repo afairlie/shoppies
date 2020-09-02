@@ -22,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: ${({theme}) => (theme.spacing.sm)};
   }
 
+  h2 {
+    font-size: ${({theme}) => (theme.fontSize.sm)};
+    margin: ${({theme}) => (theme.spacing.sm)};
+  }
+
   li {
     margin-top: ${({theme}) => (theme.spacing.xs)};
     

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import {motion} from 'framer-motion'
 
-export const ResponsiveFlexRow = styled.section`
+export const ResponsiveFlexRow = styled(motion.section)`
   display: flex;
   justify-content: space-between;
 

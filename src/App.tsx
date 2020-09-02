@@ -35,6 +35,35 @@ const MotionFlexColumn = styled(motion.section)`
   width: 100%;
 `
 
+const introContainer = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1, 
+    transition: {
+      staggerChildren: 1
+    }
+  },
+  exit: {
+    opacity: 0,
+  }
+}
+
+const introChild = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1
+  }
+}
+
+// const Intro = styled(motion.div)`
+//   display: flex;
+//   justify-content: center;
+// `
+
 const App: React.FC = () => {
   // debounced search term for API
   const [term, setTerm] = useState<string>('');
@@ -43,6 +72,7 @@ const App: React.FC = () => {
   const [results, setResults] = useState<movie[]>([]);
   const [nominations, setNominations] = useState<movie[]>([]);
   const [isComplete, setComplete] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
     const key = '538adb24'
@@ -64,8 +94,17 @@ const App: React.FC = () => {
   }, [term, nominations])
 
   useEffect(() => {
+    // clear results when new term entered
     setResults([])
   }, [term])
+
+  
+  useEffect(() => {
+    setTimeout(() => {
+      // remove intro components from virtual dom
+      setVisible(false)
+    }, 5000)
+  }, [])
 
   const nominate = (movie: movie) => {
     if (nominations.length < 5) {
@@ -88,8 +127,17 @@ const App: React.FC = () => {
 
   return (
     <MainStyles>
-      <Logo> Shoppies 🎞</Logo>
+      <Logo>Shoppies 🎞</Logo>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
+        <AnimatePresence exitBeforeEnter>
+          {visible && <ResponsiveFlexRow initial='hidden' animate='visible' exit='exit' variants={introContainer}>
+            <motion.h1 variants={introChild}>Welcom to the Shoppy Awards!</motion.h1>
+            <motion.h2 variants={introChild}>Step 1: search for your favourite film</motion.h2>
+            <motion.h2 variants={introChild}>Step 2: nominate it</motion.h2>
+            <motion.h2 variants={introChild}>Step 3: repeat!</motion.h2>
+            <motion.h2 variants={introChild}>Nominate up to 5 films <span role='img' aria-label='thumbs-up'>👍</span></motion.h2>
+          </ResponsiveFlexRow>}
+        </AnimatePresence>
         <ResponsiveFlexRow>
           <Results results={results} nominate={nominate} />
             <MotionFlexColumn>
