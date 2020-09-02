@@ -9,10 +9,6 @@ interface props {
   setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
-// margin: ${({theme}) => (`${theme.spacing.sm} ${theme.spacing.md} ${theme.spacing.md} 0`)};
-// padding: ${({theme}) => (theme.spacing.xs)};
-
-
 const Input = styled.input`
   color: ${({theme}) => (theme.colors.text)};
   font-size: ${({theme}) => (theme.fontSize.md)};
@@ -44,7 +40,6 @@ const FlexBox = styled.div`
 `
 
 export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
-  // hook controls input state
   
   // value of input debounced
   const debouncedTerm = useDebounce(value, 400);
@@ -65,8 +60,11 @@ export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder='search a movie'
+          autoFocus
         />
-        <Button clearSearch onClick={() => setValue('')}>clear search</Button>
+        <Button clearSearch onClick={(e: any) => {
+          e.currentTarget.blur()
+          setValue('')}}>clear search</Button>
       </FlexBox>
     </>
   )

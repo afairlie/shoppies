@@ -78,14 +78,17 @@ const introChild = {
 }
 
 const App: React.FC = () => {
+  // introduction animation
+  const [visible, setVisible] = useState<boolean>(true);
   // debounced search term for API
   const [term, setTerm] = useState<string>('');
   // controlled input value for SearchBar
   const [value, setValue] = useState('');
+  // search results
   const [results, setResults] = useState<movie[]>([]);
   const [nominations, setNominations] = useState<movie[]>([]);
+  // nominations complete banner
   const [isComplete, setComplete] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
     const key = '538adb24'
@@ -121,6 +124,8 @@ const App: React.FC = () => {
   const nominate = (movie: movie) => {
     if (nominations.length < 5) {
       setNominations(prev => [...prev, movie])
+    } else {
+      console.log("you can't nominate")
     }
   }
 
@@ -154,7 +159,7 @@ const App: React.FC = () => {
           </ResponsiveFlexRow>}
         </AnimatePresence>
         <ResponsiveFlexRow>
-          <Results results={results} nominate={nominate} term={term}/>
+          <Results results={results} nominations={nominations} nominate={nominate} term={term}/>
             <MotionFlexColumn>
                 <AnimatePresence>
                   {isComplete && <Complete restart={restart}/>}

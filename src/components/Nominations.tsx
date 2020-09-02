@@ -13,6 +13,7 @@ interface props {
 
 const NominationsList = styled(motion.ul)`
 display: flex;
+flex: 2;
 flex-direction: column;
 color: ${({theme}) => theme.colors.primary};
 margin-bottom: ${({theme}) => theme.spacing.sm};
@@ -57,7 +58,9 @@ export const Nominations: React.FC<props> = ({nominations, removeNomination}) =>
             {nominations && nominations.map((movie, index) => {
               return <motion.li key={index} variants={item}>
                       <span>{`${movie.title}, ${movie.year} `}</span>
-                      <Button cancel onClick={() => removeNomination(movie)}>remove</Button>
+                      <Button cancel onClick={(e: any)=> {
+                        e.currentTarget.blur()
+                        removeNomination(movie)}}>remove</Button>
                     </motion.li>
             })}
         </NominationsList>

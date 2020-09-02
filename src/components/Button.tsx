@@ -45,10 +45,6 @@ const CancelButton = styled(StyledButton)`
   &:hover {
     background-color: ${({theme}) => (theme.colors.cancel)};
   }
-
-  &:focus {
-    outline: none;
-  }
 `
 
 const ClearSearch = styled(CancelButton)`

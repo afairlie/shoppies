@@ -9,16 +9,16 @@ interface props {
 }
 
 const Banner = styled(motion.div)`
-  dispay: flex;
-  flex-direction: column;
   background-color: ${({theme}) => theme.colors.primary};
   margin-right: ${({theme}) => theme.spacing.sm};
   margin-bottom: ${({theme}) => theme.spacing.md};
   padding: ${({theme}) => theme.spacing.sm};
 
   border-radius: ${({theme}) => theme.borderRadius.soften};
+  box-shadow: 3px 3px 10px gray;
 
   @media (max-width: 779px) {
+    min-height: 92pt;
     margin-right: 0;
     padding: ${({theme}) => theme.spacing.md};
   }
@@ -29,21 +29,18 @@ const container = {
     height: 0
   },
   show: {
-    height: '100%',
+    height: 100,
     transition: {
       duration: 0.4,
       ease: "easeInOut",
-      // when: 'beforeChildren'
     }
   },
   exit: { 
     height: 0,
-    from: 'bottom',
     transition: {
       delay: 0.2,
       duration: 0.4,
       ease: "easeInOut",
-      // when: 'afterChildren'
     }
   }
 }
