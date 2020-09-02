@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-size: ${({theme}) => (theme.fontSize.sm)};
-    margin: ${({theme}) => (theme.spacing.sm)};
+    padding: ${({theme}) => (theme.fontSize.sm)};
   }
 
   li {

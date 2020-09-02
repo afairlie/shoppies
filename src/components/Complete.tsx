@@ -69,11 +69,11 @@ export const Complete: React.FC<props> = ({restart}) => {
     <Banner initial='hidden' animate='show' exit='exit' variants={container}>
       <AnimatePresence exitBeforeEnter>
         <motion.h1 key={1} variants={child}>Congratulations, your list is complete!</motion.h1>
-        <motion.h2 key={2} variants={child}>
+        <motion.h3 key={2} variants={child}>
           Would you like to <span/>
           <Button cancel onClick={() => restart()}>restart</Button>
           <span/> ?
-        </motion.h2>
+        </motion.h3>
       </AnimatePresence>
     </Banner>
   )

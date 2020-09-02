@@ -23,7 +23,7 @@ const Logo = styled.h1`
   background: -webkit-linear-gradient(#160900, #9e7a47);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: ${({theme}) => (theme.spacing.md)};
+  margin-bottom: ${({theme}) => (theme.spacing.sm)};
   line-height: normal;
 
   @media (max-width: 779px) {
@@ -36,17 +36,20 @@ const MotionFlexColumn = styled(motion.section)`
   width: 100%;
 `
 const Footer = styled.div`
-  min-height: 100%;
+  
 `
-const Cred = styled.div`
+const Cred = styled.p`
   font-size: ${({theme}) => (theme.fontSize.xs)};
-  min-height: ${({theme}) => (theme.spacing.md)};
   text-align: center;
 
   @media (max-width: 779px) {
-    padding-top: ${({theme}) => (theme.spacing.md)} 0;
+    padding-top: ${({theme}) => (theme.spacing.md)};
     min-height: ${({theme}) => (theme.spacing.lg)};
   }
+`
+const Icon = styled.img`
+  width: ${({theme}) => (theme.fontSize.sm)};
+  vertical-align: -3.75pt;
 `
 
 const introContainer = {
@@ -160,10 +163,16 @@ const App: React.FC = () => {
         </ResponsiveFlexRow>
     </MainStyles>
     <Footer>
-      <Cred>an app by Ariane Fairlie <button>G</button> <button>L</button></Cred>
+      <Cred>
+      <span>an app by Ariane Fairlie </span>
+      <a href="https://www.github.com/afairlie/" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/nolan/64/github.png" alt='github icon' /></a>
+      {' '}
+      <a href="https://github.com/afairlie/shoppies" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/wired/64/000000/repository.png" alt='repository icon'/></a>
+      {' '}
+      <a href="https://www.linkedin.com/in/arianefairlie/" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/ultraviolet/64/000000/linkedin-circled.png" alt='linkedin icon'/></a>
+      </Cred>
     </Footer>
   </>
   );
 }
-
 export default App;

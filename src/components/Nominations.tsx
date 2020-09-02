@@ -15,6 +15,7 @@ const NominationsList = styled(motion.ul)`
 display: flex;
 flex-direction: column;
 color: ${({theme}) => theme.colors.primary};
+margin-bottom: ${({theme}) => theme.spacing.sm};
 
 li {
   display: flex;
