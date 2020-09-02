@@ -23,7 +23,7 @@ export const theme: DefaultTheme = {
     title: 'Abril Fatface, cursive'
   },
   fontSize: {
-    xs: '0.25rem',
+    xs: '0.75rem',
     sm: '1.25rem',
     md: '2rem',
     lg: '4rem',

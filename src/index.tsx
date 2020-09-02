@@ -11,8 +11,9 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
 
   body {
+    padding: 0 ${({theme}) => (theme.spacing.md)};
     font-family: ${({theme}) => (theme.fontFamily.text)};
-    padding: ${({theme}) => (theme.spacing.md)};
+    color: ${({theme}) => (theme.colors.text)};
     background-color: ${({theme}) => (theme.colors.bgPrimary)};
   }
 

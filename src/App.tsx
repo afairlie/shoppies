@@ -11,12 +11,13 @@ import {Nominations} from './components/Nominations';
 import {Complete} from './components/Complete';
 
 const MainStyles = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  color: ${({theme}) => (theme.colors.text)}
+  min-height: calc(100vh - ${({theme}) => (theme.spacing.md)});
+  @media (max-width: 779px) {
+    min-height: calc(100vh - ${({theme}) => (theme.spacing.lg)});
+  }
 `
 const Logo = styled.h1`
+  padding-top: ${({theme}) => (theme.spacing.md)};
   font-family: ${({theme}) => (theme.fontFamily.title)};
   font-size: ${({theme}) => (theme.fontSize.xl)};
   background: -webkit-linear-gradient(#160900, #9e7a47);
@@ -33,6 +34,19 @@ const MotionFlexColumn = styled(motion.section)`
   display: flex;
   flex-direction: column;
   width: 100%;
+`
+const Footer = styled.div`
+  min-height: 100%;
+`
+const Cred = styled.div`
+  font-size: ${({theme}) => (theme.fontSize.xs)};
+  min-height: ${({theme}) => (theme.spacing.md)};
+  text-align: center;
+
+  @media (max-width: 779px) {
+    padding-top: ${({theme}) => (theme.spacing.md)} 0;
+    min-height: ${({theme}) => (theme.spacing.lg)};
+  }
 `
 
 const introContainer = {
@@ -58,11 +72,6 @@ const introChild = {
     opacity: 1
   }
 }
-
-// const Intro = styled(motion.div)`
-//   display: flex;
-//   justify-content: center;
-// `
 
 const App: React.FC = () => {
   // debounced search term for API
@@ -97,7 +106,6 @@ const App: React.FC = () => {
     // clear results when new term entered
     setResults([])
   }, [term])
-
   
   useEffect(() => {
     setTimeout(() => {
@@ -126,8 +134,11 @@ const App: React.FC = () => {
   }
 
   return (
+    <>
     <MainStyles>
-      <Logo>Shoppies 🎞</Logo>
+      <ResponsiveFlexRow>
+        <Logo>Shoppies 🎞</Logo>
+      </ResponsiveFlexRow>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <AnimatePresence exitBeforeEnter>
           {visible && <ResponsiveFlexRow initial='hidden' animate='visible' exit='exit' variants={introContainer}>
@@ -148,6 +159,10 @@ const App: React.FC = () => {
             </MotionFlexColumn>
         </ResponsiveFlexRow>
     </MainStyles>
+    <Footer>
+      <Cred>an app by Ariane Fairlie <button>G</button> <button>L</button></Cred>
+    </Footer>
+  </>
   );
 }
 
