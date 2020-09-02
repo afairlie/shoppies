@@ -6,6 +6,7 @@ interface props {
   disabled?: boolean;
   primary?: boolean;
   cancel?: boolean;
+  clearSearch?: boolean;
   onClick: any;
 }
 
@@ -50,11 +51,25 @@ const CancelButton = styled(StyledButton)`
   }
 `
 
-export const Button: React.FC<props> = ({children, primary, cancel, disabled, onClick}) => {
+const ClearSearch = styled(CancelButton)`
+  border: none;
+  color: ${({theme}) => (theme.colors.secondary)};
+  width: ${({theme}) => (theme.fontSize.lg)};
+  align-self: center;
+  margin: 0;
+
+  @media (max-width: 779px) {
+    font-size: ${({theme}) => (theme.fontSize.xs)};
+    width: ${({theme}) => (theme.fontSize.md)};
+  }
+`
+
+export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, disabled, onClick}) => {
   return (
     <>
       {primary && <PrimaryButton disabled={disabled} onClick={onClick}>{children}</PrimaryButton>}
       {cancel && <CancelButton disabled={disabled} onClick={onClick}>{children}</CancelButton>}
+      {clearSearch && <ClearSearch disabled={disabled} onClick={onClick}>{children}</ClearSearch>}
     </>
   )
 }
