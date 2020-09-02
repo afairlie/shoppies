@@ -55,7 +55,7 @@ export const Results: React.FC<props> = ({results, nominate}) => {
                     key={index} 
                     variants={item} 
                     custom={index}>
-              <span>{`${index + 1} ${movie.title}, ${movie.year} `}</span>
+              <span>{`${movie.title}, ${movie.year} `}</span>
               <Button 
                 primary 
                 disabled={movie.nominated} 

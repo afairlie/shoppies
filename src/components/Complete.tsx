@@ -35,14 +35,16 @@ const container = {
     height: '100%',
     transition: {
       duration: 0.4,
-      ease: "easeInOut",
+      ease: "easeIn",
       overflow: 'hidden'
     }
   },
   exit: { 
     height: 0,
     transition: {
-      duration: 0.4
+      duration: 0.4,
+      ease: "easeOut",
+      when: 'afterChildren'
     }
   }
 }
@@ -50,10 +52,10 @@ const container = {
 const child = {
   hidden: { scaleY: 0},
   show: { scaleY: 1 },
-  onExit: { 
+  exit: { 
     scaleY: 0,
     transition: {
-      duration: 0.2
+      duration: 0.3
     }
   }
 }
