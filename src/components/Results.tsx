@@ -7,7 +7,8 @@ import { Button } from './Button'
 
 interface props {
   results: movie[],
-  nominate: (movie: movie) => void
+  nominate: (movie: movie) => void,
+  term: string
 }
 
 const ResultsList = styled(motion.ul)`
@@ -29,6 +30,10 @@ const ResultsList = styled(motion.ul)`
   }
 `
 
+const ResultsDescription = styled.h2`
+  padding: 0;
+`
+
 const container = {
   hidden: {scale: 0},
   show: {
@@ -46,10 +51,12 @@ const item = {
   })
 }
 
-export const Results: React.FC<props> = ({results, nominate}) => {
+export const Results: React.FC<props> = ({results, nominate, term}) => {
 
   return (
       <ResultsList initial='hidden' animate='show' variants={container}>
+        {results.length !== 0 && <ResultsDescription>{results.length} result{results.length > 1 && 's'} for "{term}"</ResultsDescription>}
+        {(term && results.length === 0) && <ResultsDescription>no results for "{term}"</ResultsDescription>}
           {results && results.map((movie, index) => {
             return <motion.li 
                     key={index} 

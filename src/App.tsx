@@ -41,6 +41,7 @@ const Footer = styled.div`
 const Cred = styled.p`
   font-size: ${({theme}) => (theme.fontSize.xs)};
   text-align: center;
+  padding-bottom: ${({theme}) => (theme.spacing.sm)};
 
   @media (max-width: 779px) {
     padding-top: ${({theme}) => (theme.spacing.md)};
@@ -153,7 +154,7 @@ const App: React.FC = () => {
           </ResponsiveFlexRow>}
         </AnimatePresence>
         <ResponsiveFlexRow>
-          <Results results={results} nominate={nominate} />
+          <Results results={results} nominate={nominate} term={term}/>
             <MotionFlexColumn>
                 <AnimatePresence>
                   {isComplete && <Complete restart={restart}/>}
@@ -167,7 +168,7 @@ const App: React.FC = () => {
       <span>an app by Ariane Fairlie </span>
       <a href="https://www.github.com/afairlie/" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/nolan/64/github.png" alt='github icon' /></a>
       {' '}
-      <a href="https://github.com/afairlie/shoppies" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/wired/64/000000/repository.png" alt='repository icon'/></a>
+      <a href="https://github.com/afairlie/shoppies" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/wired/64/5e4629/repository.png" alt='repository icon'/></a>
       {' '}
       <a href="https://www.linkedin.com/in/arianefairlie/" target='_blank' rel="noopener noreferrer"><Icon src="https://img.icons8.com/ultraviolet/64/000000/linkedin-circled.png" alt='linkedin icon'/></a>
       </Cred>
