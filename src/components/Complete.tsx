@@ -26,32 +26,36 @@ const Banner = styled(motion.div)`
 
 const container = {
   hidden: { 
-    height: 0,
-    transition: {
-      when: 'afterChildren'
-    }
+    height: 0
   },
   show: {
     height: '100%',
     transition: {
       duration: 0.4,
-      ease: "easeIn",
-      overflow: 'hidden'
+      ease: "easeInOut",
+      // when: 'beforeChildren'
     }
   },
   exit: { 
     height: 0,
+    from: 'bottom',
     transition: {
+      delay: 0.2,
       duration: 0.4,
-      ease: "easeOut",
-      when: 'afterChildren'
+      ease: "easeInOut",
+      // when: 'afterChildren'
     }
   }
 }
 
 const child = {
   hidden: { scaleY: 0},
-  show: { scaleY: 1 },
+  show: { 
+    scaleY: 1,
+    transition: {
+      delay: 0.25
+    }
+  },
   exit: { 
     scaleY: 0,
     transition: {
