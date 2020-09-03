@@ -56,6 +56,10 @@ const Icon = styled.img`
 const Step = styled(motion.h2)`
   max-width: 12%;
   line-height: 1.25;
+
+  @media (max-width: 779px) {
+    max-width: 100%;
+  }
 `
 
 const introContainer = {
