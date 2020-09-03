@@ -53,6 +53,11 @@ const Icon = styled.img`
   vertical-align: -3.75pt;
 `
 
+const Step = styled(motion.h2)`
+  max-width: 12%;
+  line-height: 1.25;
+`
+
 const introContainer = {
   hidden: {
     opacity: 0
@@ -152,10 +157,10 @@ const App: React.FC = () => {
         <AnimatePresence exitBeforeEnter>
           {visible && <ResponsiveFlexRow initial='hidden' animate='visible' exit='exit' variants={introContainer}>
             <motion.h1 variants={introChild}>Welcom to the Shoppy Awards!</motion.h1>
-            <motion.h2 variants={introChild}>Step 1: search for your favourite film</motion.h2>
-            <motion.h2 variants={introChild}>Step 2: nominate it</motion.h2>
-            <motion.h2 variants={introChild}>Step 3: repeat!</motion.h2>
-            <motion.h2 variants={introChild}>Nominate up to 5 films <span role='img' aria-label='thumbs-up'>👍</span></motion.h2>
+            <Step variants={introChild}>Step 1: <br/> search for your favourite film</Step>
+            <Step variants={introChild}>Step 2: <br/> nominate it</Step>
+            <Step variants={introChild}>Step 3: <br/> repeat!</Step>
+            <Step variants={introChild}>Nominate up to 5 films <span role='img' aria-label='thumbs-up'>👍</span></Step>
           </ResponsiveFlexRow>}
         </AnimatePresence>
         <ResponsiveFlexRow>
