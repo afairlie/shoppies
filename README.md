@@ -1,7 +1,7 @@
 # Shoppy Awards App
-### by Ariane Fairlie, github: [@afairlie](github.com/afairlie)
+by Ariane Fairlie, github: [@afairlie](github.com/afairlie)
 
-An app to nominate your favourite films, selected from OMDB
+### An app to nominate your favourite films, selected from OMDB
 
 ## Hosted on Netlify at:
 https://shoppy-awards.netlify.app/ 
