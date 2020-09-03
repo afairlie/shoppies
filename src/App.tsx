@@ -156,7 +156,7 @@ const App: React.FC = () => {
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <AnimatePresence exitBeforeEnter>
           {visible && <ResponsiveFlexRow initial='hidden' animate='visible' exit='exit' variants={introContainer}>
-            <motion.h1 variants={introChild}>Welcom to the Shoppy Awards!</motion.h1>
+            <motion.h1 variants={introChild}>Welcome to the Shoppy Awards!</motion.h1>
             <Step variants={introChild}>Step 1: <br/> search for your favourite film</Step>
             <Step variants={introChild}>Step 2: <br/> nominate it</Step>
             <Step variants={introChild}>Step 3: <br/> repeat!</Step>
