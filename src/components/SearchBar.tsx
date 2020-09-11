@@ -64,10 +64,13 @@ export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
           placeholder='search a movie'
           autoFocus
         />
-        <Button clearSearch onClick={(e: any) => {
-          e.currentTarget.blur()
-          textInput.current.focus();
-          setValue('')}}>clear search</Button>
+        <Button 
+          clearSearch 
+          onClick={(e: any) => {
+            e.currentTarget.blur()
+            textInput.current.focus();
+            setValue('')
+          }}>clear search</Button>
       </FlexBox>
     </>
   )
