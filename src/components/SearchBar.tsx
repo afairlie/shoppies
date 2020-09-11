@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
 import styled from 'styled-components'
 import {Button} from './Button'
@@ -40,7 +40,8 @@ const FlexBox = styled.div`
 `
 
 export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
-  
+  const textInput = useRef<any>(null);
+
   // value of input debounced
   const debouncedTerm = useDebounce(value, 400);
 
@@ -56,6 +57,7 @@ export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
     <>
       <FlexBox>
         <Input 
+          ref={textInput}
           type='text'
           value={value}
           onChange={e => setValue(e.target.value)}
@@ -64,6 +66,7 @@ export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
         />
         <Button clearSearch onClick={(e: any) => {
           e.currentTarget.blur()
+          textInput.current.focus();
           setValue('')}}>clear search</Button>
       </FlexBox>
     </>
