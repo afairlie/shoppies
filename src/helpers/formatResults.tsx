@@ -9,7 +9,7 @@ export const formatResults = (results: any[], nominations: movie[]): movie[] => 
   return results.map((movie: any) => {
     // if movie is nominated, format true, else format false
     const nominated = nominations.find(nom => nom.title === movie.Title && nom.year === movie.Year)
-    return nominated ? { title: movie.Title, year: movie.Year, nominated: true } 
-      : { title: movie.Title, year: movie.Year, nominated: false }
+    return nominated ? { id: movie.Id, title: movie.Title, year: movie.Year, nominated: true } 
+      : { id: movie.imdbID, title: movie.Title, year: movie.Year, nominated: false }
   })
 }
