@@ -133,8 +133,6 @@ const App: React.FC = () => {
   const nominate = (movie: movie) => {
     if (nominations.length < 5) {
       setNominations(prev => [...prev, movie])
-    } else {
-      console.log("you can't nominate")
     }
   }
 
