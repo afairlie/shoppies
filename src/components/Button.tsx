@@ -15,6 +15,7 @@ const StyledButton = styled.button`
   background-color: transparent;
   padding: .25rem ${({theme}) => (theme.spacing.xs)};
   margin-bottom: .25rem;
+  max-height: 30pt;
 
   &:hover {
     color: ${({theme}) => (theme.colors.highlightPrimary)};

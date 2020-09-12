@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import { formatResults } from './helpers/formatResults';
@@ -9,6 +10,8 @@ import { SearchBar } from './components/SearchBar';
 import {Results} from './components/Results';
 import {Nominations} from './components/Nominations';
 import {Complete} from './components/Complete';
+import { LoginButton } from './components/Login';
+import { LogoutButton } from './components/Logout';
 
 const MainStyles = styled.div`
   min-height: calc(100vh - ${({theme}) => (theme.spacing.md)});
@@ -87,6 +90,7 @@ const introChild = {
 }
 
 const App: React.FC = () => {
+  const { user, isAuthenticated } = useAuth0();
   // introduction animation
   const [visible, setVisible] = useState<boolean>(true);
   // debounced search term for API
@@ -100,8 +104,8 @@ const App: React.FC = () => {
   const [isComplete, setComplete] = useState<boolean>(false);
 
   useEffect(() => {
-    const key = '538adb24'
-    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${key}&s=${term}&type=movie`)
+    // make sure .env works in production...
+    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_OMDB}&s=${term}&type=movie`)
     .then(res => {
         if (res.ok) {
           return res.json()
@@ -138,7 +142,7 @@ const App: React.FC = () => {
 
   const removeNomination = (movie: movie) => {
     if (isComplete) {setComplete(false)}
-    setNominations(prev => [...prev.filter(m => m.title !== movie.title || m.year !== movie.year)])
+    setNominations(prev => [...prev.filter(m => m.id !== movie.id)])
   }
 
   const restart = () => {
@@ -154,6 +158,11 @@ const App: React.FC = () => {
     <MainStyles>
       <ResponsiveFlexRow>
         <Logo>Shoppies 🎞</Logo>
+        <ResponsiveFlexRow>
+          {!isAuthenticated && <LoginButton/>}
+          {isAuthenticated && <div>{user.name}</div>}
+          {isAuthenticated && <LogoutButton/>}
+        </ResponsiveFlexRow>
       </ResponsiveFlexRow>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <AnimatePresence exitBeforeEnter>
