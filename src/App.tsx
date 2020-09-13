@@ -65,6 +65,12 @@ const Step = styled(motion.h2)`
   }
 `
 
+const UserEmail = styled.div`
+  height: 20pt;
+  padding: 4.5pt;
+  margin: .5vw;
+`
+
 const introContainer = {
   hidden: {
     opacity: 0
@@ -160,7 +166,7 @@ const App: React.FC = () => {
         <Logo>Shoppies 🎞</Logo>
         <ResponsiveFlexRow>
           {!isAuthenticated && <LoginButton/>}
-          {isAuthenticated && <div>{user.name}</div>}
+          {isAuthenticated && <UserEmail>{user.name}</UserEmail>}
           {isAuthenticated && <LogoutButton/>}
         </ResponsiveFlexRow>
       </ResponsiveFlexRow>

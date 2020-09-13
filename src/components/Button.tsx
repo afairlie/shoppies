@@ -7,6 +7,8 @@ interface props {
   primary?: boolean;
   cancel?: boolean;
   clearSearch?: boolean;
+  login?: boolean;
+  logout?: boolean;
   onClick: any;
 }
 
@@ -15,7 +17,6 @@ const StyledButton = styled.button`
   background-color: transparent;
   padding: .25rem ${({theme}) => (theme.spacing.xs)};
   margin-bottom: .25rem;
-  max-height: 30pt;
 
   &:hover {
     color: ${({theme}) => (theme.colors.highlightPrimary)};
@@ -61,12 +62,26 @@ const ClearSearch = styled(CancelButton)`
   }
 `
 
-export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, disabled, onClick}) => {
+const Login = styled(PrimaryButton)`
+  max-height: 20pt;
+  margin: .5vw;
+  margin-right: -3vw;
+`
+
+const Logout = styled(CancelButton)`
+  max-height: 20pt;
+  margin: .5vw;
+  margin-right: -3vw;
+`
+
+export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, disabled, login, logout, onClick}) => {
   return (
     <>
       {primary && <PrimaryButton disabled={disabled} onClick={onClick}>{children}</PrimaryButton>}
       {cancel && <CancelButton disabled={disabled} onClick={onClick}>{children}</CancelButton>}
       {clearSearch && <ClearSearch disabled={disabled} onClick={onClick}>{children}</ClearSearch>}
+      {login && <Login disabled={disabled} onClick={onClick}>{children}</Login>}
+      {logout && <Logout disabled={disabled} onClick={onClick}>{children}</Logout>}
     </>
   )
 }
