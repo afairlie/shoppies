@@ -81,7 +81,7 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin}) => {
     <AuthBar>
       {!loggedIn.status ? (
         <>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}>
             {displaySignup && <Register>register </Register>}
             {displaySignup && <Input type='username' name='name' placeholder='username' value={state.name} onChange={handleChange} autoComplete='username'></Input>}
             <Input type='email' name='email' placeholder='email' value={state.email} onChange={handleChange} autoComplete='email'></Input>
