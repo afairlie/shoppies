@@ -15,13 +15,10 @@ import { Complete } from './components/Complete';
 import { Footer } from './components/Footer';
 
 const MainStyles = styled.div`
-  min-height: calc(100vh - ${({theme}) => (theme.spacing.md)});
-  @media (max-width: 779px) {
-    min-height: calc(100vh - ${({theme}) => (theme.spacing.lg)});
-  }
+  padding: 0 ${({theme}) => (theme.spacing.md)};
 `
 const Logo = styled.h1`
-  padding-top: ${({theme}) => (theme.spacing.md)};
+  padding-top: ${({theme}) => (theme.spacing.xs)};
   font-family: ${({theme}) => (theme.fontFamily.title)};
   font-size: ${({theme}) => (theme.fontSize.xl)};
   background: -webkit-linear-gradient(#160900, #9e7a47);
@@ -52,7 +49,10 @@ const App: React.FC = () => {
   const [nominations, setNominations] = useState<movie[]>([]);
   // nominations complete banner
   const [isComplete, setComplete] = useState<boolean>(false);
-  const [loggedIn, setLogin] = useState<boolean>(false);
+  const [loggedIn, setLogin] = useState<{status: boolean, user: (string | null)}>({
+    status: false,
+    user: null
+  });
 
   useEffect(() => {
     const key = '538adb24'
@@ -105,26 +105,28 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
-    <MainStyles>
-      <ResponsiveFlexRow>
-        <Logo>Shoppies 🎞</Logo>
-        <UserAuth loggedIn={loggedIn} setLogin={setLogin}></UserAuth>
-      </ResponsiveFlexRow>
-        <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
-        <AnimatePresence>
-          {visible && <IntroSequence/>}
-        </AnimatePresence>
+  <>
+    <main>
+      <UserAuth loggedIn={loggedIn} setLogin={setLogin}></UserAuth>
+      <MainStyles>
         <ResponsiveFlexRow>
-          <Results results={results} nominations={nominations} nominate={nominate} term={term}/>
-            <MotionFlexColumn>
-              <AnimatePresence>
-                {isComplete && <Complete restart={restart}/>}
-              </AnimatePresence>
-              <Nominations nominations={nominations} removeNomination={removeNomination}/>
-            </MotionFlexColumn>
+          <Logo>Shoppies 🎞</Logo>
         </ResponsiveFlexRow>
-    </MainStyles>
+          <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
+          <AnimatePresence>
+            {visible && <IntroSequence/>}
+          </AnimatePresence>
+          <ResponsiveFlexRow>
+            <Results results={results} nominations={nominations} nominate={nominate} term={term}/>
+              <MotionFlexColumn>
+                <AnimatePresence>
+                  {isComplete && <Complete restart={restart}/>}
+                </AnimatePresence>
+                <Nominations nominations={nominations} removeNomination={removeNomination}/>
+              </MotionFlexColumn>
+          </ResponsiveFlexRow>
+      </MainStyles> 
+    </main>
     <Footer/>
   </>
   );

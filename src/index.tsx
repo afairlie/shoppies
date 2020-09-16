@@ -10,11 +10,17 @@ import { theme } from './styled/theme';
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
-  body {
-    padding: 0 ${({theme}) => (theme.spacing.md)};
+  html {
     font-family: ${({theme}) => (theme.fontFamily.text)};
     color: ${({theme}) => (theme.colors.text)};
     background-color: ${({theme}) => (theme.colors.bgPrimary)};
+  }
+
+  main {
+    min-height: calc(100vh - ${({theme}) => (theme.spacing.md)});
+    @media (max-width: 779px) {
+      min-height: calc(100vh - ${({theme}) => (theme.spacing.lg)});
+    }
   }
 
   h1 {

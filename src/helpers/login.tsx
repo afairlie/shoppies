@@ -9,7 +9,8 @@ export async function login(email: string, password: string) {
     },
     body: JSON.stringify({email, password})
   })
+  const message = await response.json()
   // get token back or error status
-  return response.status === 200 ? Promise.resolve(response.json()) 
-    : Promise.reject(response.status)
+  return response.status === 200 ? Promise.resolve(message) 
+    : Promise.reject({status: response.status, message})
 }

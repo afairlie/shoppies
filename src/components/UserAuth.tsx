@@ -3,12 +3,17 @@ import styled from 'styled-components';
 
 import { login } from '../helpers/login';
 
-import { ResponsiveFlexRow } from '../styled/index';
-import { Button } from './Button'
+import { Button } from './Button';
 
 interface props {
-  loggedIn: boolean,
-  setLogin: React.Dispatch<React.SetStateAction<boolean>>
+  loggedIn: {
+    status: boolean, 
+    user: (string | null)
+  },
+  setLogin: React.Dispatch<React.SetStateAction<{
+    status: boolean, 
+    user: (string | null)
+  }>>
 }
 
 const Input = styled.input`
@@ -23,6 +28,10 @@ const Input = styled.input`
   }
 `
 
+const AuthBar = styled.div`
+  text-align: right;
+`
+
 export const UserAuth: React.FC<props> = ({loggedIn, setLogin}) => {
   const [state, setState] = useState({
     email: '',
@@ -34,10 +43,10 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin}) => {
 
     login(state.email, state.password)
     .then((res: any) => {
-      setLogin(true)
+      setLogin({user: res.username, status: true})
       console.log(res)
     })
-    .catch((e: any) => console.log(e))
+    .catch((e: any) => console.log(e.status, e.message))
 
     setState({
       email: '',
@@ -50,13 +59,24 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin}) => {
   }
 
   return (
-    <ResponsiveFlexRow>
-      {!loggedIn ? <form onSubmit={handleSubmit}>
-        <Input type='email' name='email' placeholder='email' value={state.email} onChange={handleChange} autoComplete='email'></Input>
-        <Input type='password' name='password' placeholder='password' value={state.password} onChange={handleChange} autoComplete='current-password'></Input>
-        <Button login type='submit' onClick={(e: React.ChangeEvent<HTMLInputElement>) => e.currentTarget.blur()}>login</Button>
-      </form> : 
-      'logged in!'}
-    </ResponsiveFlexRow>
+    <AuthBar>
+      {!loggedIn.status ? (
+          <>
+          <form onSubmit={handleSubmit}>
+            <Input type='email' name='email' placeholder='email' value={state.email} onChange={handleChange} autoComplete='email'></Input>
+            <Input type='password' name='password' placeholder='password' value={state.password} onChange={handleChange} autoComplete='current-password'></Input>
+            <Button login type='submit' onClick={(e: React.ChangeEvent<HTMLInputElement>) => e.currentTarget.blur()}>login</Button>
+            <span>or</span>
+            <Button signup onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault()
+            e.stopPropagation()
+            console.log('signup clicked')
+            }}>sign up</Button>
+          </form>
+          </>
+        ) : (
+          <p>{loggedIn.user}</p>
+      )}
+    </AuthBar>
   )
 }
