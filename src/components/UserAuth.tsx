@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import { login } from '../helpers/login';
+
 import { ResponsiveFlexRow } from '../styled/index';
 import { Button } from './Button'
+
+interface props {
+  loggedIn: boolean,
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const Input = styled.input`
   margin-left: ${({theme}) => (theme.spacing.xs)};
@@ -15,19 +23,26 @@ const Input = styled.input`
   }
 `
 
-export function UserAuth() {
+export const UserAuth: React.FC<props> = ({loggedIn, setLogin}) => {
   const [state, setState] = useState({
     email: '',
     password: ''
   })
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    console.log(state)
+    e.preventDefault()
+
+    login(state.email, state.password)
+    .then((res: any) => {
+      setLogin(true)
+      console.log(res)
+    })
+    .catch((e: any) => console.log(e))
+
     setState({
       email: '',
       password: ''
     })
-    e.preventDefault()
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -36,11 +51,12 @@ export function UserAuth() {
 
   return (
     <ResponsiveFlexRow>
-      <form onSubmit={e => handleSubmit(e)}>
-        <Input type='text' name='email' placeholder='email' value={state.email} onChange={e => handleChange(e)}></Input>
-        <Input type='text' name='password' placeholder='password' value={state.password} onChange={e => handleChange(e)}></Input>
+      {!loggedIn ? <form onSubmit={handleSubmit}>
+        <Input type='email' name='email' placeholder='email' value={state.email} onChange={handleChange} autoComplete='email'></Input>
+        <Input type='password' name='password' placeholder='password' value={state.password} onChange={handleChange} autoComplete='current-password'></Input>
         <Button login type='submit' onClick={(e: React.ChangeEvent<HTMLInputElement>) => e.currentTarget.blur()}>login</Button>
-      </form>
+      </form> : 
+      'logged in!'}
     </ResponsiveFlexRow>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { formatResults } from './helpers/formatResults';
 import { movie } from './interfaces'
 import { ResponsiveFlexRow } from './styled/index'
@@ -51,6 +52,7 @@ const App: React.FC = () => {
   const [nominations, setNominations] = useState<movie[]>([]);
   // nominations complete banner
   const [isComplete, setComplete] = useState<boolean>(false);
+  const [loggedIn, setLogin] = useState<boolean>(false);
 
   useEffect(() => {
     const key = '538adb24'
@@ -107,7 +109,7 @@ const App: React.FC = () => {
     <MainStyles>
       <ResponsiveFlexRow>
         <Logo>Shoppies 🎞</Logo>
-        <UserAuth></UserAuth>
+        <UserAuth loggedIn={loggedIn} setLogin={setLogin}></UserAuth>
       </ResponsiveFlexRow>
         <SearchBar onSearch={(term: string) => setTerm(term)} value={value} setValue={setValue}/>
         <AnimatePresence>
