@@ -1,13 +1,13 @@
-export async function login(email: string, password: string) {
+export async function login(email: string, password: string, name: (string | null)) {
   // post to /login
-  const url = 'https://shoppy-awards-api.herokuapp.com/login'
+  const url = `https://shoppy-awards-api.herokuapp.com/${name ? 'users' : 'login'}`
 
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({email, password, name})
   })
   const message = await response.json()
   // get token back or error status

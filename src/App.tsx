@@ -18,7 +18,7 @@ const MainStyles = styled.div`
   padding: 0 ${({theme}) => (theme.spacing.md)};
 `
 const Logo = styled.h1`
-  padding-top: ${({theme}) => (theme.spacing.xs)};
+  padding-top: ${({theme}) => (theme.spacing.sm)};
   font-family: ${({theme}) => (theme.fontFamily.title)};
   font-size: ${({theme}) => (theme.fontSize.xl)};
   background: -webkit-linear-gradient(#160900, #9e7a47);
