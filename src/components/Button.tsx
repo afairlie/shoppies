@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface props {
-  children: any;
+  children: string;
   disabled?: boolean;
   primary?: boolean;
   cancel?: boolean;
+  login?: boolean;
   clearSearch?: boolean;
-  onClick: any;
+  onClick?: any;
+  type?: string;
 }
 
 const StyledButton = styled.button`
@@ -59,13 +61,19 @@ const ClearSearch = styled(CancelButton)`
     width: ${({theme}) => (theme.fontSize.md)};
   }
 `
+const Login = styled(PrimaryButton)`
+  max-height: 20pt;
+  margin: .5vw;
+  margin-right: -3vw;
+`
 
-export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, disabled, onClick}) => {
+export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, login, disabled, onClick}, props) => {
   return (
     <>
       {primary && <PrimaryButton disabled={disabled} onClick={onClick}>{children}</PrimaryButton>}
       {cancel && <CancelButton disabled={disabled} onClick={onClick}>{children}</CancelButton>}
       {clearSearch && <ClearSearch disabled={disabled} onClick={onClick}>{children}</ClearSearch>}
+      {login && <Login {...props}>{children}</Login>}
     </>
   )
 }

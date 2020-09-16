@@ -58,7 +58,7 @@ export const Nominations: React.FC<props> = ({nominations, removeNomination}) =>
             {nominations && nominations.map((movie, index) => {
               return <motion.li key={index} variants={item}>
                       <span>{`${movie.title}, ${movie.year} `}</span>
-                      <Button cancel onClick={(e: any)=> {
+                      <Button cancel onClick={(e: React.ChangeEvent<HTMLInputElement>)=> {
                         e.currentTarget.blur()
                         removeNomination(movie)}}>remove</Button>
                     </motion.li>

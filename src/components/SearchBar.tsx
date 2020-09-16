@@ -40,7 +40,7 @@ const FlexBox = styled.div`
 `
 
 export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
-  const textInput = useRef<any>(null);
+  const textInput = useRef<HTMLInputElement>(null);
 
   // value of input debounced
   const debouncedTerm = useDebounce(value, 400);
@@ -66,9 +66,9 @@ export const SearchBar: React.FC<props> = ({ onSearch, value, setValue }) => {
         />
         <Button 
           clearSearch 
-          onClick={(e: any) => {
+          onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
             e.currentTarget.blur()
-            textInput.current.focus();
+            textInput && textInput.current && textInput.current.focus();
             setValue('')
           }}>clear search</Button>
       </FlexBox>

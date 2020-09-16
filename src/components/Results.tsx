@@ -128,7 +128,7 @@ export const Results: React.FC<props> = ({results, nominations, nominate, term})
             <Button 
               primary 
               disabled={movie.nominated} 
-              onClick={(e: any) => {
+              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
                 e.currentTarget.blur()
                 nominations.length < 5 ? nominate(movie)
                   : setError(true)
