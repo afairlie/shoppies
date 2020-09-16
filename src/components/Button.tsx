@@ -73,7 +73,7 @@ export const Button: React.FC<props> = ({children, primary, cancel, clearSearch,
       {primary && <PrimaryButton disabled={disabled} onClick={onClick}>{children}</PrimaryButton>}
       {cancel && <CancelButton disabled={disabled} onClick={onClick}>{children}</CancelButton>}
       {clearSearch && <ClearSearch disabled={disabled} onClick={onClick}>{children}</ClearSearch>}
-      {login && <Login {...props}>{children}</Login>}
+      {login && <Login {...props} onClick={onClick}>{children}</Login>}
     </>
   )
 }
