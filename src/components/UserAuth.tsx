@@ -63,6 +63,11 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin}) => {
     .then((res: any) => {
       setLogin({user: res.username, status: true})
       console.log(res)
+      // get noms w/ token
+      // .then if noms
+        // promise.all fetch api for 5 films search by imdbID
+        // format movie object (make sure nominated: true)
+        // nomiate(movie) (function at app lvl)
     })
     .catch((e: any) => console.log(e.status, e.message))
 

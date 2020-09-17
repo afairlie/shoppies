@@ -130,7 +130,7 @@ export const Results: React.FC<props> = ({results, nominations, nominate, term})
               disabled={movie.nominated} 
               onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
                 e.currentTarget.blur()
-                nominations.length < 5 ? nominate(movie)
+                nominations.length < 5 ? nominate({...movie, nominated: true})
                   : setError(true)
               }}>{movie.nominated ? 'nominated' : 'nominate!'}</Button>
           </motion.li>
