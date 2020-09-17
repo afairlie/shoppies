@@ -56,7 +56,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const key = '538adb24'
-    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${key}&s=${term}&type=movie`)
+    fetch(`https://www.omdbapi.com/?apikey=${key}&s=${term}&type=movie`)
     .then(res => {
         if (res.ok) {
           return res.json()
@@ -80,14 +80,17 @@ const App: React.FC = () => {
   
   useEffect(() => {
     setTimeout(() => {
-      // remove intro components from virtual dom
+      // remove intro component from virtual dom
       setVisible(false)
     }, 5000)
   }, [])
 
-  const nominate = (movie: movie) => {
+  const nominate = (nominations: movie[], saved?: boolean) => {
     if (nominations.length < 5) {
-      setNominations(prev => [...prev, movie])
+      setNominations(prev => [...prev, ...nominations])
+    }
+    if (saved) {
+      setNominations(prev => [...nominations])
     }
   }
 
@@ -107,7 +110,7 @@ const App: React.FC = () => {
   return (
   <>
     <main>
-      <UserAuth loggedIn={loggedIn} setLogin={setLogin}></UserAuth>
+      <UserAuth loggedIn={loggedIn} setLogin={setLogin} nominate={nominate}></UserAuth>
       <MainStyles>
         <ResponsiveFlexRow>
           <Logo>Shoppies 🎞</Logo>

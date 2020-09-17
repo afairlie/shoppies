@@ -9,6 +9,9 @@ interface props {
 }
 
 const Banner = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: ${({theme}) => theme.colors.primary};
   margin-right: ${({theme}) => theme.spacing.sm};
   margin-bottom: ${({theme}) => theme.spacing.md};
