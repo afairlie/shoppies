@@ -10,6 +10,7 @@ interface props {
   signup?: boolean;
   cancelSignup?: boolean;
   clearSearch?: boolean;
+  logout?: boolean;
   onClick?: any;
   type?: string;
 }
@@ -75,9 +76,14 @@ const Signup = styled(PrimaryButton)`
 const CancelSignup = styled(CancelButton)`
   margin: .5vw;
 `
+
+const Logout = styled(CancelButton)`
+  margin: .5vw;
+  display: inline;
+`
 // margin-right: -3vw;
 
-export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, login, signup, cancelSignup, disabled, onClick}, props) => {
+export const Button: React.FC<props> = ({children, primary, cancel, clearSearch, login, signup, cancelSignup, logout, disabled, onClick}, props) => {
   return (
     <>
       {primary && <PrimaryButton disabled={disabled} onClick={onClick}>{children}</PrimaryButton>}
@@ -86,6 +92,7 @@ export const Button: React.FC<props> = ({children, primary, cancel, clearSearch,
       {login && <Login {...props} onClick={onClick}>{children}</Login>}
       {signup && <Signup onClick={onClick}>{children}</Signup>}
       {cancelSignup && <CancelSignup onClick={onClick}>{children}</CancelSignup>}
+      {logout && <Logout onClick={onClick}>{children}</Logout>}
     </>
   )
 }

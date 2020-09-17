@@ -16,7 +16,8 @@ interface props {
     status: boolean, 
     user: (string | null)
   }>>,
-  nominate: (nominations: movie[], saved?: boolean) => void
+  nominate: (nominations: movie[], saved?: boolean) => void,
+  restart: () => void
 }
 
 interface styledProps {
@@ -57,12 +58,23 @@ const Register = styled.h1`
   text-align: left;
 `
 
-const User = styled.p`
+const User = styled.span`
   margin: 2pt;
 `
 
-export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate}) => {
+const ErrorMessage = styled.p<styledProps>`
+  padding-top: 10pt;
+  color: red;
+  ${props => !props.signup && `
+    display: inline;
+    width: 100%;
+    text-align: left;
+  `}
+`
+
+export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart}) => {
   const [displaySignup, setSignup] = useState<boolean>(false)
+  const [error, setError] = useState('')
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -76,24 +88,26 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate}) => {
     login(state.email, state.password, state.name)
     .then((res: any) => {
       if (res.nominations) {
-        // fetch user movie info
         fetchUserMovies(res)
         .then(responses => {
-
           // format nominations
           const userNominations: movie[] = responses.map( res => {
             return { id: res.imdbID, title: res.Title, year: res.Year, nominated: true }
           })
-
           // add nominations list to state
           nominate(userNominations, true)
         })
         .catch(e => { throw new Error('api search error') })
       }
-
+      setSignup(false)
       setLogin({user: res.username, status: true})
     })
-    .catch((e: any) => console.log(e.status, e.message))
+    .catch((e: any) => {
+      setError(e.message.error)
+      setTimeout(() => {
+        setError('')
+      }, 2000)
+    })
 
     setState({
       name: '',
@@ -112,10 +126,18 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate}) => {
         <>
           <Form signup={displaySignup} onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}>
             {displaySignup && <Register>register </Register>}
+            {error && <ErrorMessage signup={displaySignup}>{error}</ErrorMessage>}
             {displaySignup && <Input type='username' name='name' placeholder='username' value={state.name} onChange={handleChange} autoComplete='username'></Input>}
             <Input type='email' name='email' placeholder='email' value={state.email} onChange={handleChange} autoComplete='email'></Input>
             <Input type='password' name='password' placeholder='password' value={state.password} onChange={handleChange} autoComplete='current-password'></Input>
             <Button login type='submit' onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (displaySignup && (!state.name || !state.email || !state.password)) {
+                e.preventDefault()
+                setError('Sorry, all fields are required.')
+                setTimeout(() => {
+                  setError('')
+                }, 2000)
+              }
               e.currentTarget.blur()
               }}>{displaySignup ? 'confirm' : 'login'}</Button>
             <span>or</span>
@@ -127,8 +149,14 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate}) => {
             }}>{displaySignup ? 'cancel' : 'register'}</Button>
           </Form>
         </>
-        ) : (
-          <User>{`user: ${loggedIn.user}... logout coming soon!`}</User>
+        ) : (<>
+            <User>{loggedIn.user}</User>
+            <Button logout onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+              e.currentTarget.blur()
+              restart()
+              setLogin({status: false, user: null})
+            }}>logout</Button>
+          </>
       )}
     </AuthBar>
   )

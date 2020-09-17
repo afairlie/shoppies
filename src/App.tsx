@@ -110,7 +110,7 @@ const App: React.FC = () => {
   return (
   <>
     <main>
-      <UserAuth loggedIn={loggedIn} setLogin={setLogin} nominate={nominate}></UserAuth>
+      <UserAuth loggedIn={loggedIn} setLogin={setLogin} nominate={nominate} restart={restart}></UserAuth>
       <MainStyles>
         <ResponsiveFlexRow>
           <Logo>Shoppies 🎞</Logo>
