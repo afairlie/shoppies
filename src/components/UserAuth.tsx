@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { movie } from '../interfaces';
 import { login } from '../helpers/login';
+import { fetchUserMovies } from '../helpers/fetchUserMovies';
 
 import { Button } from './Button';
 
@@ -37,11 +38,6 @@ const Form = styled.form<styledProps>`
     padding: 1vw;
   `}
 `
-// background-color: ${props => props.signup && 'white'};
-
-// position: absolute;
-// z-index: 1000;
-// right: 0px;
 
 const Input = styled.input`
   margin-left: ${({theme}) => (theme.spacing.xs)};
@@ -74,42 +70,23 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate}) => {
   })
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    const key = '538adb24';
     e.preventDefault()
     e.stopPropagation()
 
     login(state.email, state.password, state.name)
     .then((res: any) => {
       if (res.nominations) {
-        const movie1 = async function() {
-          const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${res.nominations['1']}&type=movie`)
-          return await response.json()
-        }()
-        const movie2 = async function() {
-          const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${res.nominations['2']}&type=movie`)
-          return await response.json()
-        }()
-        const movie3 = async function() {
-          const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${res.nominations['3']}&type=movie`)
-          return await response.json()
-        }()
-        const movie4 = async function() {
-          const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${res.nominations['4']}&type=movie`)
-          return await response.json()
-        }()
-        const movie5 = async function() {
-          const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${res.nominations['5']}&type=movie`)
-          return await response.json()
-        }()
         // fetch user movie info
-        Promise.all([movie1, movie2, movie3, movie4, movie5])
+        fetchUserMovies(res)
         .then(responses => {
+
+          // format nominations
           const userNominations: movie[] = responses.map( res => {
-            // format movie object (make sure nominated: true)
             return { id: res.imdbID, title: res.Title, year: res.Year, nominated: true }
           })
+
+          // add nominations list to state
           nominate(userNominations, true)
-          // nomiate(movie) (function at app lvl)
         })
         .catch(e => { throw new Error('api search error') })
       }

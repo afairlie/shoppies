@@ -18,7 +18,7 @@ const Banner = styled(motion.div)`
   padding: ${({theme}) => theme.spacing.sm};
 
   border-radius: ${({theme}) => theme.borderRadius.soften};
-  box-shadow: 3px 3px 10px gray;
+  box-shadow: 0px 2px 8px 0px gray;
 
   @media (max-width: 779px) {
     min-height: 92pt;
