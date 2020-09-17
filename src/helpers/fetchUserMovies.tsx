@@ -1,5 +1,5 @@
 export async function fetchUserMovies(res: any) {
-  const key = '538adb24';
+  const key = process.env.REACT_APP_OMDB;
   const movie1 = async function() {
     const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${res.nominations['1']}&type=movie`)
     return await response.json()

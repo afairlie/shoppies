@@ -1,6 +1,6 @@
 export async function login(email: string, password: string, name: (string | null)) {
   // post to /login
-  const url = `http://localhost:3001/${name ? 'users' : 'login'}`
+  const url = `https://https://shoppy-awards-api.herokuapp.com//${name ? 'users' : 'login'}`
 
   const response = await fetch(url, {
     method: 'POST',

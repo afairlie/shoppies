@@ -55,8 +55,7 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    const key = '538adb24'
-    fetch(`https://www.omdbapi.com/?apikey=${key}&s=${term}&type=movie`)
+    fetch(`https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB}&s=${term}&type=movie`)
     .then(res => {
         if (res.ok) {
           return res.json()
