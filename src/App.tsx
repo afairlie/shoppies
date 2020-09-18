@@ -40,12 +40,13 @@ const MotionFlexColumn = styled(motion.section)`
 const App: React.FC = () => {
   // introduction animation
   const [visible, setVisible] = useState<boolean>(true);
-  // debounced search term for API
+  // debounced search term for OMDB API
   const [term, setTerm] = useState<string>('');
   // controlled input value for SearchBar
   const [value, setValue] = useState('');
   // search results
   const [results, setResults] = useState<movie[]>([]);
+  // user nominations
   const [nominations, setNominations] = useState<movie[]>([]);
   // nominations complete banner
   const [isComplete, setComplete] = useState<boolean>(false);
@@ -95,7 +96,7 @@ const App: React.FC = () => {
 
   const removeNomination = (movie: movie) => {
     if (isComplete) {setComplete(false)}
-    setNominations(prev => [...prev.filter(m => m.title !== movie.title || m.year !== movie.year)])
+    setNominations(prev => [...prev.filter(m => m.id !== movie.id)])
   }
 
   const restart = () => {
