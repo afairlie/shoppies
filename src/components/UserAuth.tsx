@@ -83,7 +83,6 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    e.stopPropagation()
 
     login(form.email, form.password, form.name)
     .then((res: any) => {
@@ -142,7 +141,6 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart
               }}>{displaySignup ? 'confirm' : 'login'}</Button>
             <span>or</span>
             <Button signup={!displaySignup} cancelSignup={displaySignup} onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-              e.preventDefault()
               e.stopPropagation()
               e.currentTarget.blur()
               setSignup(!displaySignup)
