@@ -75,7 +75,7 @@ const ErrorMessage = styled.p<styledProps>`
 export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart}) => {
   const [displaySignup, setSignup] = useState<boolean>(false)
   const [error, setError] = useState('')
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     name: '',
     email: '',
     password: ''
@@ -85,7 +85,7 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart
     e.preventDefault()
     e.stopPropagation()
 
-    login(state.email, state.password, state.name)
+    login(form.email, form.password, form.name)
     .then((res: any) => {
       if (res.nominations) {
         fetchUserMovies(res)
@@ -109,7 +109,7 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart
       }, 2000)
     })
 
-    setState({
+    setForm({
       name: '',
       email: '',
       password: ''
@@ -117,7 +117,7 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setState({ ...state, [e.currentTarget.name]: e.currentTarget.value })
+    setForm({ ...form, [e.currentTarget.name]: e.currentTarget.value })
   }
 
   return (
@@ -127,11 +127,11 @@ export const UserAuth: React.FC<props> = ({loggedIn, setLogin, nominate, restart
           <Form signup={displaySignup} onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}>
             {displaySignup && <Register>register </Register>}
             {error && <ErrorMessage signup={displaySignup}>{error}</ErrorMessage>}
-            {displaySignup && <Input type='username' name='name' placeholder='username' value={state.name} onChange={handleChange} autoComplete='username'></Input>}
-            <Input type='email' name='email' placeholder='email' value={state.email} onChange={handleChange} autoComplete='email'></Input>
-            <Input type='password' name='password' placeholder='password' value={state.password} onChange={handleChange} autoComplete='current-password'></Input>
+            {displaySignup && <Input type='username' name='name' placeholder='username' value={form.name} onChange={handleChange} autoComplete='username'></Input>}
+            <Input type='email' name='email' placeholder='email' value={form.email} onChange={handleChange} autoComplete='email'></Input>
+            <Input type='password' name='password' placeholder='password' value={form.password} onChange={handleChange} autoComplete='current-password'></Input>
             <Button login type='submit' onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-              if (displaySignup && (!state.name || !state.email || !state.password)) {
+              if (displaySignup && (!form.name || !form.email || !form.password)) {
                 e.preventDefault()
                 setError('Sorry, all fields are required.')
                 setTimeout(() => {
